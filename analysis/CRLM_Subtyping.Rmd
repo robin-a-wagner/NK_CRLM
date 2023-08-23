@@ -1,0 +1,19 @@
+---
+title: "CRLM_Subtyping"
+author: "Robin Wagner (UoM Laptop)"
+date: "2023-08-23"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Introduction
+
+In this code I will use nearest template prediction to classify the consensus molecular subtype (CMS) and intrinsic CMS of each CRLM sample using the CMScaller package. 
+
+```{r}
+
+
+
+```
+
