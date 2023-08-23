@@ -20,11 +20,11 @@ library(ggplot2)
 
 ```
 
-Read in and prepare the raw data. 
+Read in and prepare the raw counts data for the 58 samples. 
 
 ```{r}
 
-expr <- readRDS("data/Hollande_DGEList_Tum_Raw.RDS"); dim(expr)
+expr <- readRDS("data/Hollande_DGEList_Tum_Raw.RDS"); dim(expr); head(expr)
 
 ```
 
