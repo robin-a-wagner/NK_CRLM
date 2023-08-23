@@ -23,7 +23,6 @@ library(RColorBrewer)
 
 ```
 
-
 ### Prepare data
 
 Read in and prepare the raw counts data for the 58 samples. 
@@ -109,6 +108,8 @@ nk_score <- data.frame(sample = colnames(expr_rpkm),
                        quartile = ntile(score, 4)) %>%
   mutate(designation = ifelse(quartile == 1, "low",
                               ifelse(quartile == 4, "high", "intermediate"))); head(nk_score)
+
+write.csv(nk_score, "output/20230823_Shembrey_NK_Score_Hollande_CRLM.csv")
 
 ```
 
