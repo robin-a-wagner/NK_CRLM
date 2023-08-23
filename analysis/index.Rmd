@@ -10,4 +10,4 @@ editor_options:
 
 Click this [link](NK_Scoring.html) for NK scoring. 
 
-Click this [link](CRLM_Sybtyping.html) for CRLM classification using NTP via CMScaller. 
+Click this [link](CRLM_Subtyping.html) for CRLM classification using NTP via CMScaller. 
