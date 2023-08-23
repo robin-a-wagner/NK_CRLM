@@ -521,15 +521,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtreedcb7ccbd9d92b021ffd0d2968a5e4b72802bb2eftargetblankdcb7ccba">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtreef4b343d9a0656de03dabe92c0b77d95c61e3cca7targetblankf4b343da">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/dcb7ccbd9d92b021ffd0d2968a5e4b72802bb2ef" target="_blank">dcb7ccb</a>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/f4b343d9a0656de03dabe92c0b77d95c61e3cca7" target="_blank">f4b343d</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtreedcb7ccbd9d92b021ffd0d2968a5e4b72802bb2eftargetblankdcb7ccba"
+id="strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtreef4b343d9a0656de03dabe92c0b77d95c61e3cca7targetblankf4b343da"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -539,7 +539,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/dcb7ccbd9d92b021ffd0d2968a5e4b72802bb2ef" target="_blank">dcb7ccb</a>.
+<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/f4b343d9a0656de03dabe92c0b77d95c61e3cca7" target="_blank">f4b343d</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -562,9 +562,11 @@ Untracked files:
     Untracked:  data/DGEList_Filtered_TCGA_COAD_ForCarolyn.RDS
     Untracked:  data/Genomics_WES_WGS_ProteinCoding_ImpactHighModerate_Canonicals_UniqueGenes.txt
     Untracked:  data/Hollande_DGEList_Tum_Raw.RDS
+    Untracked:  data/iCMS_template.csv
+    Untracked:  output/20230823_Shembrey_NK_Score_Hollande_CRLM.csv
 
 Unstaged changes:
-    Modified:   analysis/index.Rmd
+    Modified:   analysis/NK_Scoring.Rmd
 
 </code></pre>
 <p>
@@ -615,6 +617,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/f4b343d9a0656de03dabe92c0b77d95c61e3cca7/analysis/CRLM_Subtyping.Rmd" target="_blank">f4b343d</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-23
+</td>
+<td>
+Comitting my first-pass draft
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/robin-a-wagner/NK_CRLM/d5a0814c09087341f240b01b612f3d260e194c46/docs/CRLM_Subtyping.html" target="_blank">d5a0814</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/robin-a-wagner/NK_CRLM/blob/dcb7ccbd9d92b021ffd0d2968a5e4b72802bb2ef/analysis/CRLM_Subtyping.Rmd" target="_blank">dcb7ccb</a>
 </td>
 <td>
@@ -639,6 +675,140 @@ wflow_publish("analysis/CRLM_Subtyping.Rmd")
 <p>In this code I will use nearest template prediction to classify the
 consensus molecular subtype (CMS) and intrinsic CMS of each CRLM sample
 using the CMScaller package.</p>
+<pre class="r"><code>library(dplyr)
+library(CMScaller)
+library(ggplot2)</code></pre>
+<div id="prepare-data" class="section level3">
+<h3>Prepare data</h3>
+<p>Read in and prepare the raw counts data for the 58 samples.</p>
+<pre class="r"><code>expr &lt;- readRDS(&quot;data/Hollande_DGEList_Tum_Raw.RDS&quot;); dim(expr)</code></pre>
+<pre><code>Loading required package: edgeR</code></pre>
+<pre><code>Loading required package: limma</code></pre>
+<pre><code>[1] 25702    58</code></pre>
+<p>Remove duplicated sample.</p>
+<pre class="r"><code>expr$samples &lt;- expr$samples[-12,]
+expr$counts &lt;- expr$counts[,-12]
+dim(expr$samples); dim(expr$counts)</code></pre>
+<pre><code>[1] 57 43</code></pre>
+<pre><code>[1] 25702    57</code></pre>
+<pre class="r"><code>all(colnames(expr$counts) == rownames(expr$samples))</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<p>Filter out primary tumours as these are irrelevant to our
+analysis.</p>
+<pre class="r"><code>expr$samples &lt;- expr$samples %&gt;% filter(!Tissue == &quot;CoT&quot;); summary (expr$samples$Tissue)</code></pre>
+<pre><code>CoT  LT 
+  0  44 </code></pre>
+<pre class="r"><code>expr$counts &lt;- expr$counts[,rownames(expr$samples)]; dim(expr$counts)</code></pre>
+<pre><code>[1] 25702    44</code></pre>
+<p>Filter out lowly-expressed genes.</p>
+<pre class="r"><code>keep &lt;- filterByExpr(expr$counts)</code></pre>
+<pre><code>No group or design set. Assuming all samples belong to one group.</code></pre>
+<pre class="r"><code>expr_filt &lt;- expr[keep, ]; dim(expr_filt)</code></pre>
+<pre><code>[1] 9888   44</code></pre>
+<p>Normalise for library size.</p>
+<pre class="r"><code>expr_norm &lt;- calcNormFactors(expr_filt, method = &quot;TMM&quot;)</code></pre>
+</div>
+<div id="perform-subtyping" class="section level3">
+<h3>Perform subtyping</h3>
+<p>Perform CMS classification using inbuilt template.</p>
+<pre class="r"><code>CMS &lt;- CMScaller(emat = expr_norm$counts, RNAseq=TRUE, FDR=0.05); head(CMS)</code></pre>
+<pre><code>performing log2-transform and quantile normalization...</code></pre>
+<pre><code>cosine correlation distance</code></pre>
+<pre><code>262/530 templates features not in emat, discarded</code></pre>
+<pre><code>44 samples; 4 classes; 42-119 features/class</code></pre>
+<pre><code>serial processing; 1000 permutation(s)...</code></pre>
+<pre><code>predicted samples/class (FDR&lt;0.05)</code></pre>
+<pre><code>
+CMS1 CMS2 CMS3 CMS4 &lt;NA&gt; 
+   4    4    3   19   14 </code></pre>
+<pre><code>14/44 samples set to NA</code></pre>
+<p><img src="figure/CRLM_Subtyping.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>            prediction    d.CMS1    d.CMS2    d.CMS3    d.CMS4    p.value
+JV388_LT          CMS3 0.6818851 0.6751093 0.6464738 0.8253085 0.02697303
+KG078_LT          &lt;NA&gt; 0.7375867 0.6906808 0.7137610 0.8315222 0.89410589
+PCC002_LT1a       &lt;NA&gt; 0.8140515 0.6483671 0.7308334 0.7996499 0.03596404
+PCC002_LT1b       CMS4 0.7209306 0.6957662 0.7393632 0.5656365 0.00100000
+PDO032_LT         CMS4 0.5960818 0.7169246 0.6856722 0.5786111 0.00100000
+PDW486_LT         CMS4 0.6053514 0.7252045 0.6907481 0.5934999 0.00100000
+                    FDR
+JV388_LT    0.039560440
+KG078_LT    0.972144135
+PCC002_LT1a 0.051045728
+PCC002_LT1b 0.001692308
+PDO032_LT   0.001692308
+PDW486_LT   0.001692308</code></pre>
+<pre class="r"><code>summary(CMS$prediction)</code></pre>
+<pre><code>CMS1 CMS2 CMS3 CMS4 NA&#39;s 
+   4    4    3   19   14 </code></pre>
+<p>Create templates for iCMS. Here genes up in iCMS2 and down iCMS3 are
+designated iCMS2 genes. The reverse is true for iCMS3.</p>
+<pre class="r"><code>iCMS_template &lt;- read.csv(&quot;data/iCMS_template.csv&quot;); head(iCMS_template)</code></pre>
+<pre><code>         symbol class
+1        CXCL14 iCMS2
+2 LY6G6F-LY6G6D iCMS2
+3          EREG iCMS2
+4         TIMP3 iCMS2
+5         KRT23 iCMS2
+6        RUBCNL iCMS2</code></pre>
+<pre class="r"><code>iCMS_template$probe &lt;- fromTo(key = iCMS_template$symbol, id.in = &quot;symbol&quot;, id.out = &quot;entrez&quot;)</code></pre>
+<pre><code>no corresponding entrez for symbol key(s) LY6G6F-LY6G6D; RAB5IF; RTF2; ATP5F1E; SINHCAF; AC004130.1; SMIM26; RETREG1; AL445524.1; DEPP1; AC020656.1; ATP5F1A; TENT5A; AP001816.1; DGLUCY; AC005833.1; SMIM31</code></pre>
+<pre><code>Warning: 17 identifiers not translated, NA&#39;s returned</code></pre>
+<p>Classify according to iCMS.</p>
+<pre class="r"><code>iCMS &lt;- CMScaller(expr_norm$counts, templates = iCMS_template, RNAseq = T, FDR = 0.05); head(iCMS)</code></pre>
+<pre><code>performing log2-transform and quantile normalization...</code></pre>
+<pre><code>cosine correlation distance</code></pre>
+<pre><code>156/715 templates features not in emat, discarded</code></pre>
+<pre><code>44 samples; 2 classes; 237-322 features/class</code></pre>
+<pre><code>serial processing; 1000 permutation(s)...</code></pre>
+<pre><code>predicted samples/class (FDR&lt;0.05)</code></pre>
+<pre><code>
+iCMS2 iCMS3  &lt;NA&gt; 
+   18    15    11 </code></pre>
+<pre><code>11/44 samples set to NA</code></pre>
+<p><img src="figure/CRLM_Subtyping.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>            prediction   d.iCMS2   d.iCMS3     p.value       FDR
+JV388_LT          &lt;NA&gt; 0.6857759 0.7278128 0.150849151 0.1843712
+KG078_LT          &lt;NA&gt; 0.6904140 0.7234145 0.281718282 0.3178360
+PCC002_LT1a      iCMS2 0.5960954 0.8029136 0.001000000 0.0017600
+PCC002_LT1b      iCMS2 0.6611603 0.7502447 0.005994006 0.0101437
+PDO032_LT         &lt;NA&gt; 0.7040763 0.7101243 0.856143856 0.8760542
+PDW486_LT        iCMS3 0.7684975 0.6398528 0.001000000 0.0017600</code></pre>
+<pre class="r"><code>summary(iCMS$prediction)</code></pre>
+<pre><code>iCMS2 iCMS3  NA&#39;s 
+   18    15    11 </code></pre>
+<p>Load NK score data.</p>
+<pre class="r"><code>nk_score &lt;- read.csv(&quot;output/20230823_Shembrey_NK_Score_Hollande_CRLM.csv&quot;, row.names = 1); head(nk_score)</code></pre>
+<pre><code>       sample      score quartile  designation
+1    JV388_LT -0.4628994        1          low
+2    KG078_LT -0.4401634        3 intermediate
+3 PCC002_LT1a -0.4714542        1          low
+4 PCC002_LT1b -0.4519359        3 intermediate
+5   PDO032_LT -0.4574141        2 intermediate
+6   PDW486_LT -0.4471963        3 intermediate</code></pre>
+<p>Visualise the association between subtypes and NK score.</p>
+<pre class="r"><code>plot_data &lt;- data.frame(sample = colnames(expr_norm$counts),
+                        CMS = CMS$prediction,
+                        iCMS = iCMS$prediction,
+                        nk_score = nk_score$score) %&gt;%
+  tidyr::gather(key = system, 
+         value = subtype,
+         c(&quot;CMS&quot;, &quot;iCMS&quot;)); head(plot_data)</code></pre>
+<pre><code>Warning: attributes are not identical across measure variables; they will be
+dropped</code></pre>
+<pre><code>       sample   nk_score system subtype
+1    JV388_LT -0.4628994    CMS    CMS3
+2    KG078_LT -0.4401634    CMS    &lt;NA&gt;
+3 PCC002_LT1a -0.4714542    CMS    &lt;NA&gt;
+4 PCC002_LT1b -0.4519359    CMS    CMS4
+5   PDO032_LT -0.4574141    CMS    CMS4
+6   PDW486_LT -0.4471963    CMS    CMS4</code></pre>
+<pre class="r"><code>ggplot(plot_data, aes(x = subtype, y = nk_score, fill = subtype)) + 
+  geom_boxplot() + 
+  geom_point(position = position_dodge(0.9), color = &quot;gray20&quot;) + 
+  facet_wrap(~system, scales = &quot;free_x&quot;) +
+  theme_bw() +
+  theme(text = element_text(size = 15))</code></pre>
+<p><img src="figure/CRLM_Subtyping.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -666,20 +836,26 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] workflowr_1.7.0
+[1] edgeR_3.42.4     limma_3.56.2     ggplot2_3.4.3    CMScaller_0.99.2
+[5] dplyr_1.1.2      workflowr_1.7.0 
 
 loaded via a namespace (and not attached):
- [1] vctrs_0.6.3       httr_1.4.7        cli_3.6.1         knitr_1.43       
- [5] rlang_1.1.1       xfun_0.40         stringi_1.7.12    processx_3.8.2   
- [9] promises_1.2.1    jsonlite_1.8.7    glue_1.6.2        rprojroot_2.0.3  
-[13] git2r_0.32.0      htmltools_0.5.6   httpuv_1.6.11     ps_1.7.5         
-[17] sass_0.4.7        fansi_1.0.4       rmarkdown_2.24    jquerylib_0.1.4  
-[21] tibble_3.2.1      evaluate_0.21     fastmap_1.1.1     yaml_2.3.7       
-[25] lifecycle_1.0.3   whisker_0.4.1     stringr_1.5.0     compiler_4.3.1   
-[29] fs_1.6.3          pkgconfig_2.0.3   Rcpp_1.0.11       rstudioapi_0.15.0
-[33] later_1.3.1       digest_0.6.33     R6_2.5.1          utf8_1.2.3       
-[37] pillar_1.9.0      callr_3.7.3       magrittr_2.0.3    bslib_0.5.1      
-[41] tools_4.3.1       cachem_1.0.8      getPass_0.2-2    </code></pre>
+ [1] tidyr_1.3.0       sass_0.4.7        utf8_1.2.3        generics_0.1.3   
+ [5] lattice_0.21-8    stringi_1.7.12    digest_0.6.33     magrittr_2.0.3   
+ [9] evaluate_0.21     grid_4.3.1        fastmap_1.1.1     rprojroot_2.0.3  
+[13] jsonlite_1.8.7    processx_3.8.2    whisker_0.4.1     ps_1.7.5         
+[17] promises_1.2.1    httr_1.4.7        purrr_1.0.2       fansi_1.0.4      
+[21] scales_1.2.1      jquerylib_0.1.4   cli_3.6.1         rlang_1.1.1      
+[25] munsell_0.5.0     withr_2.5.0       cachem_1.0.8      yaml_2.3.7       
+[29] tools_4.3.1       colorspace_2.1-0  locfit_1.5-9.8    httpuv_1.6.11    
+[33] vctrs_0.6.3       R6_2.5.1          lifecycle_1.0.3   git2r_0.32.0     
+[37] stringr_1.5.0     fs_1.6.3          pkgconfig_2.0.3   callr_3.7.3      
+[41] pillar_1.9.0      bslib_0.5.1       later_1.3.1       gtable_0.3.3     
+[45] glue_1.6.2        Rcpp_1.0.11       highr_0.10        xfun_0.40        
+[49] tibble_3.2.1      tidyselect_1.2.0  rstudioapi_0.15.0 knitr_1.43       
+[53] farver_2.1.1      htmltools_0.5.6   labeling_0.4.2    rmarkdown_2.24   
+[57] compiler_4.3.1    getPass_0.2-2    </code></pre>
+</div>
 </div>
 </div>
 
