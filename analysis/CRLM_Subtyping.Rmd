@@ -16,6 +16,7 @@ In this code I will use nearest template prediction to classify the consensus mo
 library(dplyr)
 library(CMScaller)
 library(ggplot2)
+library(RColorBrewer)
 
 ```
 
@@ -120,6 +121,7 @@ ggplot(plot_data, aes(x = subtype, y = nk_score, fill = subtype)) +
   geom_point(position = position_dodge(0.9), color = "gray20") + 
   facet_wrap(~system, scales = "free_x") +
   theme_bw() +
-  theme(text = element_text(size = 15))
+  theme(text = element_text(size = 15)) +
+  scale_fill_manual(values = brewer.pal(8, "Paired"))
 
 ```
