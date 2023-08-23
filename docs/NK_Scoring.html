@@ -521,15 +521,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtreed3afb43c51629bd718ed436b6c0b9cee9dc89ffatargetblankd3afb43a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtreedf98762616abd7f4b956df441ec4e0b6595760cbtargetblankdf98762a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/d3afb43c51629bd718ed436b6c0b9cee9dc89ffa" target="_blank">d3afb43</a>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/df98762616abd7f4b956df441ec4e0b6595760cb" target="_blank">df98762</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtreed3afb43c51629bd718ed436b6c0b9cee9dc89ffatargetblankd3afb43a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtreedf98762616abd7f4b956df441ec4e0b6595760cbtargetblankdf98762a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -539,7 +539,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/d3afb43c51629bd718ed436b6c0b9cee9dc89ffa" target="_blank">d3afb43</a>.
+<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/df98762616abd7f4b956df441ec4e0b6595760cb" target="_blank">df98762</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -612,6 +612,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/df98762616abd7f4b956df441ec4e0b6595760cb/analysis/NK_Scoring.Rmd" target="_blank">df98762</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-23
+</td>
+<td>
+wflow_publish("analysis/NK_Scoring.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/robin-a-wagner/NK_CRLM/ca6f83389e37beeed65beabaa58fec3d0205f838/docs/NK_Scoring.html" target="_blank">ca6f833</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/robin-a-wagner/NK_CRLM/blob/d3afb43c51629bd718ed436b6c0b9cee9dc89ffa/analysis/NK_Scoring.Rmd" target="_blank">d3afb43</a>
 </td>
 <td>
@@ -649,9 +683,186 @@ Attaching package: &#39;dplyr&#39;</code></pre>
 <pre><code>Loading required package: limma</code></pre>
 <pre class="r"><code>library(singscore)
 library(ggplot2)</code></pre>
-<p>Read in and prepare the raw data.</p>
-<pre class="r"><code>expr &lt;- readRDS(&quot;data/Hollande_DGEList_Tum_Raw.RDS&quot;); dim(expr)</code></pre>
+<p>Read in and prepare the raw counts data for the 58 samples.</p>
+<pre class="r"><code>expr &lt;- readRDS(&quot;data/Hollande_DGEList_Tum_Raw.RDS&quot;); dim(expr); head(expr)</code></pre>
 <pre><code>[1] 25702    58</code></pre>
+<pre><code>An object of class &quot;DGEList&quot;
+$counts
+          JV388_CoT JV388_LT KG078_LT PCC002_CoT PCC002_LT1a PCC002_LT1b
+653635          138      120      170        409         152         102
+100422834         0        0        0          0           0           0
+645520            0        0        0          0           0           0
+79501             0        0        0          0           0           0
+729737            0        0        0          0           0           0
+100507658         0        0        0          0           0           0
+          PDO032_CoT1 PDO032_CoT2 PDO032_CoT3 PDO032_LT PDW486_LT yPIK315_LT_2
+653635             53         113         319       182       179          142
+100422834           0           0           0         0         0            0
+645520              0           0           0         0         0            0
+79501               0           0           0         0         0            0
+729737              0           1           0         0         1            0
+100507658           0           0           0         0         1            0
+          PPF166_CoT PRG070_LT PSH095_CoT PSH095_LT PSP686_CoT PSP686_LT
+653635           331       223        274       264        125       154
+100422834          0         0          0         0          0         0
+645520             0         0          1         0          0         0
+79501              0         0          0         0          0         0
+729737             0         0          0         0          0         0
+100507658          0         0          0         0          0         0
+          PVC769_LT RIK738_LT RMB252_LT1 RMB252_LT2 SCP119_LT SJB486_LT
+653635          200       875         68         23        12       147
+100422834         0         0          0          0         0         0
+645520            0         0          0          0         0         0
+79501             0         0          0          0         0         0
+729737            0         1          0          0         0         0
+100507658         0         0          0          0         0         0
+          SSF997_CoT yPIK315_LT TM190_LT VJR275_CoT1 VJR275_CoT2 VJR275_CoT3
+653635            94        203       84         121         179         179
+100422834          0          0        0           0           0           0
+645520             0          2        0           0           0           0
+79501              0          0        0           0           0           0
+729737             0          0        0           0           0           0
+100507658          0          0        0           1           2           0
+          VJR275_LT VPL998_LT1 VPL998_LT2 yPAM872_LT yPCB369_LT yPCN571_LT
+653635          180        173        141         99         53        170
+100422834         0          0          0          0          0          0
+645520            0          0          0          0          0          0
+79501             0          0          0          0          0          0
+729737            0          0          0          0          0          0
+100507658         0          0          0          0          0          0
+          yPDB516_LT1 yPDB516_LT2 yPDC275_LT yPDE819_LT yPHH610_LT yPJF520_LT1
+653635            213         211        193        217         28         136
+100422834           0           0          0          0          0           0
+645520              0           0          0          0          0           0
+79501               0           0          0          0          0           0
+729737              0           0          0          0          0           0
+100507658           1           0          1          0          0           0
+          yPJF520_LT2 yPLG775_LT1 yPLG775_LT2 yPLP955_LT yPMK295_LT yPPF166_LT
+653635            131          39          79        146         20         47
+100422834           0           0           0          0          0          0
+645520              0           0           0          0          0          0
+79501               0           0           0          0          0          0
+729737              0           0           0          0          0          0
+100507658           0           0           0          1          0          0
+          yPPJ102_LT yPPM845_LT yPRH925_LT1 yPSQ256_LT1 yPSQ256_LT2
+653635           360        125         356         257         279
+100422834          0          0           0           0           0
+645520             0          0           0           0           0
+79501              0          0           0           0           0
+729737             0          0           1           0           0
+100507658          0          0           1           0           0
+          yPTM689_LT_2016 yPTM689_LT_2017 yPVK121_LT1 yPVK121_LT2 SAW190_LT
+653635                158             172         192         375       138
+100422834               0               0           0           0         0
+645520                  0               0           0           0         0
+79501                   0               0           0           0         0
+729737                  0               0           0           0         0
+100507658               1               0           0           0         0
+
+$samples
+            group lib.size norm.factors Primary.Met Organoid.Tissue
+JV388_CoT       1  2276863            1     Primary          Tissue
+JV388_LT        1  2506407            1         Met          Tissue
+KG078_LT        1  2310604            1         Met          Tissue
+PCC002_CoT      1  3842418            1     Primary          Tissue
+PCC002_LT1a     1  2621005            1         Met          Tissue
+            Extraction.Date Tumour.Organoid        RNA.Kit Chemo.Naive.Treated
+JV388_CoT           18/2/18              NA QIAGEN ALLPREP               Naive
+JV388_LT            18/2/18              NA QIAGEN ALLPREP               Naive
+KG078_LT            18/2/18              NA QIAGEN ALLPREP               Naive
+PCC002_CoT          28/3/18              NA QIAGEN ALLPREP               Naive
+PCC002_LT1a         25/3/18              NA QIAGEN ALLPREP               Naive
+            Chemo.response lib.size.1 norm.factors.1 Assigned
+JV388_CoT                     2276863      1.1149679  2276863
+JV388_LT                      2506407      0.9714962  2506407
+KG078_LT                      2310604      0.9321868  2310604
+PCC002_CoT                    3842418      0.9917073  3842418
+PCC002_LT1a                   2621005      0.9596813  2621005
+            Unassigned_Unmapped Unassigned_NoFeatures Unassigned_Ambiguity
+JV388_CoT                590868               6472914                 5505
+JV388_LT                 388392               4634584                 5072
+KG078_LT                 472585               4986968                 7514
+PCC002_CoT               727824               5693068                 8890
+PCC002_LT1a              516775               5585813                11171
+            Same_patients Colon.Liver Location       SampleID     Samples
+JV388_CoT           JV388       Colon               JV388.Cot   JV388_CoT
+JV388_LT            JV388       Liver                JV388.LT    JV388_LT
+KG078_LT                        Liver                KG078.LT    KG078_LT
+PCC002_CoT         PCC002       Colon              PCC002.COT  PCC002_CoT
+PCC002_LT1a        PCC002       Liver      LT1 PCC002.LT1a.LT PCC002_LT1a
+            Patients Gender Age Treatment       Response Response_Tum
+JV388_CoT      JV388   Male  NA      &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;
+JV388_LT       JV388   Male  NA      &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;
+KG078_LT       KG078   &lt;NA&gt;  NA      &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;
+PCC002_CoT    PCC002 Female  64   Control      Sensitive         &lt;NA&gt;
+PCC002_LT1a   PCC002 Female  64   Control Semi-sensitive         &lt;NA&gt;
+            ChemoStatus Tissue TissueSample   Run Date_RNA_extraction
+JV388_CoT         Naive    CoT          CoT  &lt;NA&gt;                &lt;NA&gt;
+JV388_LT          Naive     LT           LT  &lt;NA&gt;                &lt;NA&gt;
+KG078_LT          Naive     LT           LT  &lt;NA&gt;                &lt;NA&gt;
+PCC002_CoT        Naive    CoT          CoT Run 2          14/01/2019
+PCC002_LT1a       Naive     LT         LT1a Run 2          29/12/2018
+            Date_RNA_extraction_Tum Matched_TumOrg_RNAseq
+JV388_CoT                   18/2/18                  &lt;NA&gt;
+JV388_LT                    18/2/18                  &lt;NA&gt;
+KG078_LT                    18/2/18                  &lt;NA&gt;
+PCC002_CoT                     &lt;NA&gt;            PCC002_CoT
+PCC002_LT1a                    &lt;NA&gt;           PCC002_LT1a
+            Matched_TumOrg_Genomics Matched_TumOrg_RNAseq_Genomics
+JV388_CoT                      &lt;NA&gt;                           &lt;NA&gt;
+JV388_LT                       &lt;NA&gt;                           &lt;NA&gt;
+KG078_LT                       &lt;NA&gt;                           &lt;NA&gt;
+PCC002_CoT               PCC002_CoT                     PCC002_CoT
+PCC002_LT1a             PCC002_LT1a                    PCC002_LT1a
+            Matched_RNAseqGenomics_Tum Matched_RNAseqGenomics_Org     Platform
+JV388_CoT                         &lt;NA&gt;                       &lt;NA&gt; RNAseqID_Tum
+JV388_LT                          &lt;NA&gt;                       &lt;NA&gt; RNAseqID_Tum
+KG078_LT                          &lt;NA&gt;                       &lt;NA&gt; RNAseqID_Tum
+PCC002_CoT                  PCC002_CoT                 PCC002_CoT RNAseqID_Tum
+PCC002_LT1a                PCC002_LT1a                PCC002_LT1a RNAseqID_Tum
+                      Platform_SampleID          Data Sample.Type
+JV388_CoT        RNAseqID_Tum_JV388.Cot 3prime_RNAseq         Tum
+JV388_LT          RNAseqID_Tum_JV388.LT 3prime_RNAseq         Tum
+KG078_LT          RNAseqID_Tum_KG078.LT 3prime_RNAseq         Tum
+PCC002_CoT      RNAseqID_Tum_PCC002.COT 3prime_RNAseq         Tum
+PCC002_LT1a RNAseqID_Tum_PCC002.LT1a.LT 3prime_RNAseq         Tum
+                 Unique_IDs
+JV388_CoT     JV388_CoT_Tum
+JV388_LT       JV388_LT_Tum
+KG078_LT       KG078_LT_Tum
+PCC002_CoT   PCC002_CoT_Tum
+PCC002_LT1a PCC002_LT1a_Tum
+53 more rows ...
+
+$genes
+             GeneID                                                    Chr
+653635       653635 chr1;chr1;chr1;chr1;chr1;chr1;chr1;chr1;chr1;chr1;chr1
+100422834 100422834                                                   chr1
+645520       645520                                         chr1;chr1;chr1
+79501         79501                                                   chr1
+729737       729737                                    chr1;chr1;chr1;chr1
+100507658 100507658                                         chr1;chr1;chr1
+                                                                      Start
+653635    14362;14970;15796;16607;16858;17233;17606;17915;18268;24738;29321
+100422834                                                             30366
+645520                                                    34611;35277;35721
+79501                                                                 69091
+729737                                          136698;136953;139790;140075
+100507658                                              319944;320881;321032
+                                                                        End
+653635    14829;15038;15947;16765;17055;17368;17742;18061;18366;24891;29370
+100422834                                                             30503
+645520                                                    35174;35481;36081
+79501                                                                 70008
+729737                                          136805;139696;139847;140566
+100507658                                              320653;320938;321056
+                         Strand Length  ENTREZID     SYMBOL TXCHROM
+653635    -;-;-;-;-;-;-;-;-;-;-   1769    653635     WASH7P    chr1
+100422834                     +    138 100422834 MIR1302-10    &lt;NA&gt;
+645520                    -;-;-   1130    645520    FAM138A    &lt;NA&gt;
+79501                         +    918     79501      OR4F5    chr1
+729737                  -;-;-;-   3402    729737  LOC729737    chr1
+100507658                 +;+;+    793 100507658       &lt;NA&gt;    &lt;NA&gt;</code></pre>
 <p>Remove duplicated sample.</p>
 <pre class="r"><code>expr$samples &lt;- expr$samples[-12,]; dim(expr$samples)</code></pre>
 <pre><code>[1] 57 43</code></pre>
