@@ -521,15 +521,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtreed91dcb19c551fd3a76c06fd34327025eb81358aftargetblankd91dcb1a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtreee60fe04f934732408eb7ac667022a9706a5bf8a3targetblanke60fe04a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/d91dcb19c551fd3a76c06fd34327025eb81358af" target="_blank">d91dcb1</a>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/e60fe04f934732408eb7ac667022a9706a5bf8a3" target="_blank">e60fe04</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtreed91dcb19c551fd3a76c06fd34327025eb81358aftargetblankd91dcb1a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtreee60fe04f934732408eb7ac667022a9706a5bf8a3targetblanke60fe04a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -539,7 +539,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/d91dcb19c551fd3a76c06fd34327025eb81358af" target="_blank">d91dcb1</a>.
+<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/e60fe04f934732408eb7ac667022a9706a5bf8a3" target="_blank">e60fe04</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -607,6 +607,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/e60fe04f934732408eb7ac667022a9706a5bf8a3/analysis/NK_Scoring.Rmd" target="_blank">e60fe04</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-23
+</td>
+<td>
+wflow_publish("analysis/NK_Scoring.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/robin-a-wagner/NK_CRLM/6a26401677b7d3a0f7d33e9f7b623d9573be9783/docs/NK_Scoring.html" target="_blank">6a26401</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -727,9 +761,10 @@ library(RColorBrewer)</code></pre>
 <pre class="r"><code>expr &lt;- readRDS(&quot;data/Hollande_DGEList_Tum_Raw.RDS&quot;); dim(expr)</code></pre>
 <pre><code>[1] 25702    58</code></pre>
 <p>Remove duplicated sample.</p>
-<pre class="r"><code>expr$samples &lt;- expr$samples[-12,]; dim(expr$samples)</code></pre>
+<pre class="r"><code>expr$samples &lt;- expr$samples[-12,]
+expr$counts &lt;- expr$counts[,-12]
+dim(expr$samples); dim(expr$counts)</code></pre>
 <pre><code>[1] 57 43</code></pre>
-<pre class="r"><code>expr$counts &lt;- expr$counts[,-12]; dim(expr$counts)</code></pre>
 <pre><code>[1] 25702    57</code></pre>
 <pre class="r"><code>all(colnames(expr$counts) == rownames(expr$samples))</code></pre>
 <pre><code>[1] TRUE</code></pre>
@@ -789,7 +824,44 @@ scoring with singscore.</p>
   scale_fill_manual(values = brewer.pal(3, &quot;Paired&quot;)) + 
   labs(x = &quot;&quot;) +
   theme(text = element_text(size = 15))</code></pre>
-<p><img src="figure/NK_Scoring.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/NK_Scoring.Rmd/unnamed-chunk-11-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
+Past versions of unnamed-chunk-11-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/6a26401677b7d3a0f7d33e9f7b623d9573be9783/docs/figure/NK_Scoring.Rmd/unnamed-chunk-11-1.png" target="_blank">6a26401</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
