@@ -521,15 +521,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtreeafb3d73e1b216e12c2f8cf6896969eb38223b5a6targetblankafb3d73a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtree107c71f618a1b2056ad46b2a9ca9f9ec82261daetargetblank107c71fa">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/afb3d73e1b216e12c2f8cf6896969eb38223b5a6" target="_blank">afb3d73</a>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/107c71f618a1b2056ad46b2a9ca9f9ec82261dae" target="_blank">107c71f</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtreeafb3d73e1b216e12c2f8cf6896969eb38223b5a6targetblankafb3d73a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtree107c71f618a1b2056ad46b2a9ca9f9ec82261daetargetblank107c71fa"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -539,7 +539,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/afb3d73e1b216e12c2f8cf6896969eb38223b5a6" target="_blank">afb3d73</a>.
+<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/107c71f618a1b2056ad46b2a9ca9f9ec82261dae" target="_blank">107c71f</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -609,6 +609,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/107c71f618a1b2056ad46b2a9ca9f9ec82261dae/analysis/CRLM_Subtyping.Rmd" target="_blank">107c71f</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-23
+</td>
+<td>
+Amended boxplot colors
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/robin-a-wagner/NK_CRLM/7d172e2837c573d728c68935e723e46d1dfba4bf/docs/CRLM_Subtyping.html" target="_blank">7d172e2</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -708,7 +742,8 @@ consensus molecular subtype (CMS) and intrinsic CMS of each CRLM sample
 using the CMScaller package.</p>
 <pre class="r"><code>library(dplyr)
 library(CMScaller)
-library(ggplot2)</code></pre>
+library(ggplot2)
+library(RColorBrewer)</code></pre>
 <div id="prepare-data" class="section level3">
 <h3>Prepare data</h3>
 <p>Read in and prepare the raw counts data for the 58 samples.</p>
@@ -898,7 +933,8 @@ dropped</code></pre>
   geom_point(position = position_dodge(0.9), color = &quot;gray20&quot;) + 
   facet_wrap(~system, scales = &quot;free_x&quot;) +
   theme_bw() +
-  theme(text = element_text(size = 15))</code></pre>
+  theme(text = element_text(size = 15)) +
+  scale_fill_manual(values = brewer.pal(8, &quot;Paired&quot;))</code></pre>
 <p><img src="figure/CRLM_Subtyping.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
@@ -964,8 +1000,8 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] edgeR_3.42.4     limma_3.56.2     ggplot2_3.4.3    CMScaller_0.99.2
-[5] dplyr_1.1.2      workflowr_1.7.0 
+[1] edgeR_3.42.4       limma_3.56.2       RColorBrewer_1.1-3 ggplot2_3.4.3     
+[5] CMScaller_0.99.2   dplyr_1.1.2        workflowr_1.7.0   
 
 loaded via a namespace (and not attached):
  [1] tidyr_1.3.0       sass_0.4.7        utf8_1.2.3        generics_0.1.3   
