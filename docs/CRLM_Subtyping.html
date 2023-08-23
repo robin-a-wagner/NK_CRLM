@@ -521,15 +521,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtreef4b343d9a0656de03dabe92c0b77d95c61e3cca7targetblankf4b343da">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtreeafb3d73e1b216e12c2f8cf6896969eb38223b5a6targetblankafb3d73a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/f4b343d9a0656de03dabe92c0b77d95c61e3cca7" target="_blank">f4b343d</a>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/afb3d73e1b216e12c2f8cf6896969eb38223b5a6" target="_blank">afb3d73</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtreef4b343d9a0656de03dabe92c0b77d95c61e3cca7targetblankf4b343da"
+id="strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtreeafb3d73e1b216e12c2f8cf6896969eb38223b5a6targetblankafb3d73a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -539,7 +539,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/f4b343d9a0656de03dabe92c0b77d95c61e3cca7" target="_blank">f4b343d</a>.
+<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/afb3d73e1b216e12c2f8cf6896969eb38223b5a6" target="_blank">afb3d73</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -564,9 +564,6 @@ Untracked files:
     Untracked:  data/Hollande_DGEList_Tum_Raw.RDS
     Untracked:  data/iCMS_template.csv
     Untracked:  output/20230823_Shembrey_NK_Score_Hollande_CRLM.csv
-
-Unstaged changes:
-    Modified:   analysis/NK_Scoring.Rmd
 
 </code></pre>
 <p>
@@ -612,6 +609,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/afb3d73e1b216e12c2f8cf6896969eb38223b5a6/analysis/CRLM_Subtyping.Rmd" target="_blank">afb3d73</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-23
+</td>
+<td>
+Silenced messages on CMScaller
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/robin-a-wagner/NK_CRLM/8988bffe11720b72c7f357c9fcc8967d3823f834/docs/CRLM_Subtyping.html" target="_blank">8988bff</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -712,17 +743,47 @@ analysis.</p>
 <h3>Perform subtyping</h3>
 <p>Perform CMS classification using inbuilt template.</p>
 <pre class="r"><code>CMS &lt;- CMScaller(emat = expr_norm$counts, RNAseq=TRUE, FDR=0.05); head(CMS)</code></pre>
-<pre><code>performing log2-transform and quantile normalization...</code></pre>
-<pre><code>cosine correlation distance</code></pre>
-<pre><code>262/530 templates features not in emat, discarded</code></pre>
-<pre><code>44 samples; 4 classes; 42-119 features/class</code></pre>
-<pre><code>serial processing; 1000 permutation(s)...</code></pre>
-<pre><code>predicted samples/class (FDR&lt;0.05)</code></pre>
+<p><img src="figure/CRLM_Subtyping.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
+Past versions of unnamed-chunk-7-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/8988bffe11720b72c7f357c9fcc8967d3823f834/docs/figure/CRLM_Subtyping.Rmd/unnamed-chunk-7-1.png" target="_blank">8988bff</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre><code>
 CMS1 CMS2 CMS3 CMS4 &lt;NA&gt; 
    4    4    3   19   14 </code></pre>
-<pre><code>14/44 samples set to NA</code></pre>
-<p><img src="figure/CRLM_Subtyping.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre><code>            prediction    d.CMS1    d.CMS2    d.CMS3    d.CMS4    p.value
 JV388_LT          CMS3 0.6818851 0.6751093 0.6464738 0.8253085 0.02697303
 KG078_LT          &lt;NA&gt; 0.7375867 0.6906808 0.7137610 0.8315222 0.89410589
@@ -755,17 +816,47 @@ designated iCMS2 genes. The reverse is true for iCMS3.</p>
 <pre><code>Warning: 17 identifiers not translated, NA&#39;s returned</code></pre>
 <p>Classify according to iCMS.</p>
 <pre class="r"><code>iCMS &lt;- CMScaller(expr_norm$counts, templates = iCMS_template, RNAseq = T, FDR = 0.05); head(iCMS)</code></pre>
-<pre><code>performing log2-transform and quantile normalization...</code></pre>
-<pre><code>cosine correlation distance</code></pre>
-<pre><code>156/715 templates features not in emat, discarded</code></pre>
-<pre><code>44 samples; 2 classes; 237-322 features/class</code></pre>
-<pre><code>serial processing; 1000 permutation(s)...</code></pre>
-<pre><code>predicted samples/class (FDR&lt;0.05)</code></pre>
+<p><img src="figure/CRLM_Subtyping.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
+Past versions of unnamed-chunk-9-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/8988bffe11720b72c7f357c9fcc8967d3823f834/docs/figure/CRLM_Subtyping.Rmd/unnamed-chunk-9-1.png" target="_blank">8988bff</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre><code>
 iCMS2 iCMS3  &lt;NA&gt; 
    18    15    11 </code></pre>
-<pre><code>11/44 samples set to NA</code></pre>
-<p><img src="figure/CRLM_Subtyping.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre><code>            prediction   d.iCMS2   d.iCMS3     p.value       FDR
 JV388_LT          &lt;NA&gt; 0.6857759 0.7278128 0.150849151 0.1843712
 KG078_LT          &lt;NA&gt; 0.6904140 0.7234145 0.281718282 0.3178360
@@ -809,6 +900,43 @@ dropped</code></pre>
   theme_bw() +
   theme(text = element_text(size = 15))</code></pre>
 <p><img src="figure/CRLM_Subtyping.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
+Past versions of unnamed-chunk-11-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/8988bffe11720b72c7f357c9fcc8967d3823f834/docs/figure/CRLM_Subtyping.Rmd/unnamed-chunk-11-1.png" target="_blank">8988bff</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
