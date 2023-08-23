@@ -521,15 +521,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtree3b9cea94cd8f6fe2bc2d8d8510f282bb423965fbtargetblank3b9cea9a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtree7e4dd2d6ee6689d2081f3299557d77432b8bd9aetargetblank7e4dd2da">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/3b9cea94cd8f6fe2bc2d8d8510f282bb423965fb" target="_blank">3b9cea9</a>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/7e4dd2d6ee6689d2081f3299557d77432b8bd9ae" target="_blank">7e4dd2d</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtree3b9cea94cd8f6fe2bc2d8d8510f282bb423965fbtargetblank3b9cea9a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtree7e4dd2d6ee6689d2081f3299557d77432b8bd9aetargetblank7e4dd2da"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -539,7 +539,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/3b9cea94cd8f6fe2bc2d8d8510f282bb423965fb" target="_blank">3b9cea9</a>.
+<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/7e4dd2d6ee6689d2081f3299557d77432b8bd9ae" target="_blank">7e4dd2d</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -562,6 +562,8 @@ Untracked files:
     Untracked:  data/DGEList_Filtered_TCGA_COAD_ForCarolyn.RDS
     Untracked:  data/Genomics_WES_WGS_ProteinCoding_ImpactHighModerate_Canonicals_UniqueGenes.txt
     Untracked:  data/Hollande_DGEList_Tum_Raw.RDS
+    Untracked:  data/iCMS_template.csv
+    Untracked:  output/20230823_Shembrey_NK_Score_Hollande_CRLM.csv
 
 </code></pre>
 <p>
@@ -607,6 +609,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/7e4dd2d6ee6689d2081f3299557d77432b8bd9ae/analysis/NK_Scoring.Rmd" target="_blank">7e4dd2d</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-23
+</td>
+<td>
+write.csv for NK score export
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/robin-a-wagner/NK_CRLM/9601bf615e782012fd9bcbd7652475877c655f6e/docs/NK_Scoring.html" target="_blank">9601bf6</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -943,6 +979,7 @@ scoring with singscore.</p>
 4 PCC002_LT1b -0.4519359        3 intermediate
 5   PDO032_LT -0.4574141        2 intermediate
 6   PDW486_LT -0.4471963        3 intermediate</code></pre>
+<pre class="r"><code>write.csv(nk_score, &quot;output/20230823_Shembrey_NK_Score_Hollande_CRLM.csv&quot;)</code></pre>
 <p>Visualise the scores.</p>
 <pre class="r"><code>ggplot(nk_score, aes(x = reorder(sample, score), y = score, fill = designation)) +
   geom_bar(stat = &quot;identity&quot;) +
@@ -974,6 +1011,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/9601bf615e782012fd9bcbd7652475877c655f6e/docs/figure/NK_Scoring.Rmd/unnamed-chunk-11-1.png" target="_blank">9601bf6</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-23
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/robin-a-wagner/NK_CRLM/blob/f7562c1433e4794bd67ab8939b606bc118d598d6/docs/figure/NK_Scoring.Rmd/unnamed-chunk-11-1.png" target="_blank">f7562c1</a>
