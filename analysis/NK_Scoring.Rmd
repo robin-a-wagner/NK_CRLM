@@ -13,7 +13,7 @@ In this code I will load and process the raw counts data generated from CRLM tis
 
 ### Setup 
 
-```{r}
+```{r message=FALSE, warning=FALSE}
  
 library(dplyr) 
 library(edgeR) 
@@ -114,7 +114,7 @@ nk_score <- data.frame(sample = colnames(expr_rpkm),
 
 Visualise the scores. 
 
-```{r, fig.dim = c(6,20)}
+```{r, fig.height=10, fig.width=6}
 
 ggplot(nk_score, aes(x = reorder(sample, score), y = score, fill = designation)) +
   geom_bar(stat = "identity") +
