@@ -1,0 +1,60 @@
+---
+title: "NK_Scoring"
+author: "Robin Wagner (UoM Laptop)"
+date: "2023-08-23"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Introduction
+
+In this code I will load and process the raw counts data generated from CRLM tissue and perform single-sample scoring against a CRC-specific NK signature using singscore. 
+
+```{r}
+ 
+library(dplyr) 
+library(edgeR) 
+library(singscore)
+library(ggplot2)
+
+```
+
+Read in and prepare the raw data. 
+
+```{r}
+
+expr <- readRDS("data/Hollande_DGEList_Tum_Raw.RDS"); dim(expr)
+
+```
+
+
+Remove duplicated sample. 
+
+```{r} 
+
+expr$samples <- expr$samples[-12,]; dim(expr$samples)
+expr$counts <- expr$counts[,-12]; dim(expr$counts)
+all(colnames(expr$counts) == rownames(expr$samples))
+
+```
+
+Filter out primary tumours as these are irrelevant to our analysis. 
+
+```{r}
+
+expr$samples <- expr$samples %>% filter(!Tissue == "CoT"); summary (expr$samples$Tissue)
+expr$counts <- expr$counts[,rownames(expr$samples)]; dim(expr$counts)
+
+```
+
+Load the NK signature now so that we preserve these genes upon filtering. 
+
+```{r}
+
+nk_sig <- read.csv("data/20230822_Shembrey_NK_Signature.csv"); head(nk_sig)
+
+```
+
+
+
