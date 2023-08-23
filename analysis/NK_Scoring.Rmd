@@ -38,8 +38,9 @@ Remove duplicated sample.
 
 ```{r} 
 
-expr$samples <- expr$samples[-12,]; dim(expr$samples)
-expr$counts <- expr$counts[,-12]; dim(expr$counts)
+expr$samples <- expr$samples[-12,]
+expr$counts <- expr$counts[,-12]
+dim(expr$samples); dim(expr$counts)
 all(colnames(expr$counts) == rownames(expr$samples))
 
 ```
@@ -113,7 +114,7 @@ nk_score <- data.frame(sample = colnames(expr_rpkm),
 
 Visualise the scores. 
 
-```{r}
+```{r, fig.dim = c(6,10)}
 
 ggplot(nk_score, aes(x = reorder(sample, score), y = score, fill = designation)) +
   geom_bar(stat = "identity") +
