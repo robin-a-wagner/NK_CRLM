@@ -11,23 +11,28 @@ editor_options:
 
 In this code I will load and process the raw counts data generated from CRLM tissue and perform single-sample scoring against a CRC-specific NK signature using singscore. 
 
+### Setup 
+
 ```{r}
  
 library(dplyr) 
 library(edgeR) 
 library(singscore)
 library(ggplot2)
+library(RColorBrewer)
 
 ```
+
+
+### Prepare data
 
 Read in and prepare the raw counts data for the 58 samples. 
 
 ```{r}
 
-expr <- readRDS("data/Hollande_DGEList_Tum_Raw.RDS"); dim(expr); head(expr)
+expr <- readRDS("data/Hollande_DGEList_Tum_Raw.RDS"); dim(expr)
 
 ```
-
 
 Remove duplicated sample. 
 
@@ -56,5 +61,66 @@ nk_sig <- read.csv("data/20230822_Shembrey_NK_Signature.csv"); head(nk_sig)
 
 ```
 
+Filter out lowly-expressed genes. 
 
+```{r}
 
+keep <- filterByExpr(expr$counts)
+keep2 <- rownames(expr$counts) %in% nk_sig$ENTREZID
+expr_filt <- expr[keep | keep2, ]; dim(expr_filt)
+
+```
+
+Normalise for library size. 
+
+```{r}
+
+expr_norm <- calcNormFactors(expr_filt, method = "TMM")
+
+```
+
+### Perform NK scoring
+
+Normalise read counts for gene length, in order to perform sample scoring with singscore. 
+
+```{r}
+
+expr_rpkm <- edgeR::rpkm(expr_norm, gene.length = expr_norm$genes$Length, log = T)
+
+```
+
+Rank genes. 
+
+```{r}
+
+expr_ranked <- rankGenes(expr_rpkm)
+
+```
+
+Score samples using NK signature. 
+
+```{r}
+
+score <- simpleScore(expr_ranked, nk_sig$ENTREZID)[,1]; head(score)
+
+nk_score <- data.frame(sample = colnames(expr_rpkm),
+                       score = score, 
+                       quartile = ntile(score, 4)) %>%
+  mutate(designation = ifelse(quartile == 1, "low",
+                              ifelse(quartile == 4, "high", "intermediate"))); head(nk_score)
+
+```
+
+Visualise the scores. 
+
+```{r}
+
+ggplot(nk_score, aes(x = reorder(sample, score), y = score, fill = designation)) +
+  geom_bar(stat = "identity") +
+  coord_flip() + 
+  theme_bw() + 
+  scale_fill_manual(values = brewer.pal(3, "Paired")) + 
+  labs(x = "") +
+  theme(text = element_text(size = 15))
+
+```
