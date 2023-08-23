@@ -8,4 +8,6 @@ editor_options:
   chunk_output_type: console
 ---
 
-Click this [link](NK_Scoring.html) to see my results. 
+Click this [link](NK_Scoring.html) for NK scoring. 
+
+Click this [link](CRLM_Sybtyping.html) for CRLM classification using NTP via CMScaller. 
