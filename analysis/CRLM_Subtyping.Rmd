@@ -11,9 +11,115 @@ editor_options:
 
 In this code I will use nearest template prediction to classify the consensus molecular subtype (CMS) and intrinsic CMS of each CRLM sample using the CMScaller package. 
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
-
+library(dplyr)
+library(CMScaller)
+library(ggplot2)
 
 ```
 
+### Prepare data
+
+Read in and prepare the raw counts data for the 58 samples. 
+
+```{r}
+
+expr <- readRDS("data/Hollande_DGEList_Tum_Raw.RDS"); dim(expr)
+
+```
+
+Remove duplicated sample. 
+
+```{r} 
+
+expr$samples <- expr$samples[-12,]
+expr$counts <- expr$counts[,-12]
+dim(expr$samples); dim(expr$counts)
+all(colnames(expr$counts) == rownames(expr$samples))
+
+```
+
+Filter out primary tumours as these are irrelevant to our analysis. 
+
+```{r}
+
+expr$samples <- expr$samples %>% filter(!Tissue == "CoT"); summary (expr$samples$Tissue)
+expr$counts <- expr$counts[,rownames(expr$samples)]; dim(expr$counts)
+
+```
+
+Filter out lowly-expressed genes. 
+
+```{r}
+
+keep <- filterByExpr(expr$counts)
+expr_filt <- expr[keep, ]; dim(expr_filt)
+
+```
+
+Normalise for library size. 
+
+```{r}
+
+expr_norm <- calcNormFactors(expr_filt, method = "TMM")
+
+```
+
+### Perform subtyping 
+
+Perform CMS classification using inbuilt template. 
+
+```{r}
+
+CMS <- CMScaller(emat = expr_norm$counts, RNAseq=TRUE, FDR=0.05); head(CMS)
+summary(CMS$prediction)
+
+```
+
+Create templates for iCMS. Here genes up in iCMS2 and down iCMS3 are designated iCMS2 genes. The reverse is true for iCMS3. 
+
+```{r}
+
+iCMS_template <- read.csv("data/iCMS_template.csv"); head(iCMS_template)
+iCMS_template$probe <- fromTo(key = iCMS_template$symbol, id.in = "symbol", id.out = "entrez")
+
+```
+
+Classify according to iCMS. 
+
+```{r}
+
+iCMS <- CMScaller(expr_norm$counts, templates = iCMS_template, RNAseq = T, FDR = 0.05); head(iCMS)
+summary(iCMS$prediction)
+
+```
+
+Load NK score data. 
+
+```{r}
+
+nk_score <- read.csv("output/20230823_Shembrey_NK_Score_Hollande_CRLM.csv", row.names = 1); head(nk_score)
+
+```
+
+Visualise the association between subtypes and NK score. 
+
+```{r}
+
+plot_data <- data.frame(sample = colnames(expr_norm$counts),
+                        CMS = CMS$prediction,
+                        iCMS = iCMS$prediction,
+                        nk_score = nk_score$score) %>%
+  tidyr::gather(key = system, 
+         value = subtype,
+         c("CMS", "iCMS")); head(plot_data)
+
+ggplot(plot_data, aes(x = subtype, y = nk_score, fill = subtype)) + 
+  geom_boxplot() + 
+  geom_point(position = position_dodge(0.9), color = "gray20") + 
+  facet_wrap(~system, scales = "free_x") +
+  theme_bw() +
+  theme(text = element_text(size = 15))
+
+```
