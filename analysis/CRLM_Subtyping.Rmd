@@ -70,7 +70,7 @@ expr_norm <- calcNormFactors(expr_filt, method = "TMM")
 
 Perform CMS classification using inbuilt template. 
 
-```{r}
+```{r message=FALSE}
 
 CMS <- CMScaller(emat = expr_norm$counts, RNAseq=TRUE, FDR=0.05); head(CMS)
 summary(CMS$prediction)
@@ -88,7 +88,7 @@ iCMS_template$probe <- fromTo(key = iCMS_template$symbol, id.in = "symbol", id.o
 
 Classify according to iCMS. 
 
-```{r}
+```{r message=FALSE}
 
 iCMS <- CMScaller(expr_norm$counts, templates = iCMS_template, RNAseq = T, FDR = 0.05); head(iCMS)
 summary(iCMS$prediction)
