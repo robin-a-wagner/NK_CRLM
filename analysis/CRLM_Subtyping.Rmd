@@ -132,7 +132,7 @@ ggplot(plot_data, aes(x = iCMS, y = nk_score, fill = iCMS)) +
   theme_bw()  +
   theme(text = element_text(size = 15),
         legend.position = "none") +
-  scale_fill_manual(values = brewer.pal(3, "Paired")[c(2:3)]) +
+  scale_fill_manual(values = brewer.pal(3, "Paired")[2:3]) +
   labs(x = "") +
   ggtitle("iCMS")
 
