@@ -46,7 +46,7 @@ Filter out primary tumours as these are irrelevant to our analysis.
 
 ```{r}
 
-expr$samples <- expr$samples %>% filter(!Tissue == "CoT"); summary (expr$samples$Tissue)
+expr$samples <- expr$samples %>% filter(!Tissue == "CoT"); summary(expr$samples$Tissue)
 expr$counts <- expr$counts[,rownames(expr$samples)]; dim(expr$counts)
 
 ```
@@ -60,21 +60,13 @@ expr_filt <- expr[keep, ]; dim(expr_filt)
 
 ```
 
-Normalise for library size. 
-
-```{r}
-
-expr_norm <- calcNormFactors(expr_filt, method = "TMM")
-
-```
-
 ### Perform subtyping 
 
 Perform CMS classification using inbuilt template. 
 
 ```{r message=FALSE}
 
-CMS <- CMScaller(emat = expr_norm$counts, RNAseq=TRUE, FDR=0.05); head(CMS)
+CMS <- CMScaller(emat = expr_filt$counts, RNAseq=TRUE, FDR=0.05); head(CMS)
 summary(CMS$prediction)
 
 ```
@@ -92,7 +84,7 @@ Classify according to iCMS.
 
 ```{r message=FALSE}
 
-iCMS <- CMScaller(expr_norm$counts, templates = iCMS_template, RNAseq = T, FDR = 0.05); head(iCMS)
+iCMS <- CMScaller(expr_filt$counts, templates = iCMS_template, RNAseq = T, FDR = 0.05); head(iCMS)
 summary(iCMS$prediction)
 
 ```
@@ -109,7 +101,7 @@ Visualise the association between subtypes and NK score.
 
 ```{r}
 
-plot_data <- data.frame(sample = colnames(expr_norm$counts),
+plot_data <- data.frame(sample = colnames(expr_filt$counts),
                         CMS = CMS$prediction,
                         iCMS = iCMS$prediction,
                         nk_score = nk_score$score); head(plot_data)
