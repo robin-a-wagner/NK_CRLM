@@ -17,6 +17,7 @@ library(dplyr)
 library(CMScaller)
 library(ggplot2)
 library(RColorBrewer)
+library(ggpubr)
 
 ```
 
@@ -111,17 +112,30 @@ Visualise the association between subtypes and NK score.
 plot_data <- data.frame(sample = colnames(expr_norm$counts),
                         CMS = CMS$prediction,
                         iCMS = iCMS$prediction,
-                        nk_score = nk_score$score) %>%
-  tidyr::gather(key = system, 
-         value = subtype,
-         c("CMS", "iCMS")); head(plot_data)
+                        nk_score = nk_score$score); head(plot_data)
 
-ggplot(plot_data, aes(x = subtype, y = nk_score, fill = subtype)) + 
+par(mfrow = c(2,1))
+
+ggplot(plot_data, aes(x = CMS, y = nk_score, fill = CMS)) + 
   geom_boxplot() + 
   geom_point(position = position_dodge(0.9), color = "gray20") + 
-  facet_wrap(~system, scales = "free_x") +
+  stat_compare_means(method = "anova") +
   theme_bw() +
-  theme(text = element_text(size = 15)) +
-  scale_fill_manual(values = brewer.pal(8, "Paired"))
+  theme(text = element_text(size = 15),
+        legend.position = "none") +
+  scale_fill_manual(values = brewer.pal(8, "Paired")) +
+  labs(x = "") +
+  ggtitle("CMS")
+
+ggplot(plot_data, aes(x = iCMS, y = nk_score, fill = iCMS)) + 
+  geom_boxplot() + 
+  geom_point(position = position_dodge(0.9), color = "gray20") + 
+  stat_compare_means(method = "t.test", comparisons = list(c("iCMS2", "iCMS3"))) +
+  theme_bw()  +
+  theme(text = element_text(size = 15),
+        legend.position = "none") +
+  scale_fill_manual(values = brewer.pal(8, "Paired")) +
+  labs(x = "") +
+  ggtitle("iCMS")
 
 ```
