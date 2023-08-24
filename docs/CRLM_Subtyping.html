@@ -390,7 +390,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2023-08-24
+<strong>Last updated:</strong> 2023-08-25
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -521,15 +521,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtree85942591ca921df70893db175e90ed37c8212c49targetblank8594259a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtree159e2050c9112927c2192fa269a7181e9ef456d2targetblank159e205a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/85942591ca921df70893db175e90ed37c8212c49" target="_blank">8594259</a>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/159e2050c9112927c2192fa269a7181e9ef456d2" target="_blank">159e205</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtree85942591ca921df70893db175e90ed37c8212c49targetblank8594259a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtree159e2050c9112927c2192fa269a7181e9ef456d2targetblank159e205a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -539,7 +539,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/85942591ca921df70893db175e90ed37c8212c49" target="_blank">8594259</a>.
+<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/159e2050c9112927c2192fa269a7181e9ef456d2" target="_blank">159e205</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -611,6 +611,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/159e2050c9112927c2192fa269a7181e9ef456d2/analysis/CRLM_Subtyping.Rmd" target="_blank">159e205</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-25
+</td>
+<td>
+Removed TMM normalisation because CMScaller wants non-normalised counts
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/robin-a-wagner/NK_CRLM/856b44ab72ca2763d101a1bb4264736c07e9975a/docs/CRLM_Subtyping.html" target="_blank">856b44a</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-24
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -919,7 +953,7 @@ dim(expr$samples); dim(expr$counts)</code></pre>
 <pre><code>[1] TRUE</code></pre>
 <p>Filter out primary tumours as these are irrelevant to our
 analysis.</p>
-<pre class="r"><code>expr$samples &lt;- expr$samples %&gt;% filter(!Tissue == &quot;CoT&quot;); summary (expr$samples$Tissue)</code></pre>
+<pre class="r"><code>expr$samples &lt;- expr$samples %&gt;% filter(!Tissue == &quot;CoT&quot;); summary(expr$samples$Tissue)</code></pre>
 <pre><code>CoT  LT 
   0  44 </code></pre>
 <pre class="r"><code>expr$counts &lt;- expr$counts[,rownames(expr$samples)]; dim(expr$counts)</code></pre>
@@ -929,51 +963,12 @@ analysis.</p>
 <pre><code>No group or design set. Assuming all samples belong to one group.</code></pre>
 <pre class="r"><code>expr_filt &lt;- expr[keep, ]; dim(expr_filt)</code></pre>
 <pre><code>[1] 9888   44</code></pre>
-<p>Normalise for library size.</p>
-<pre class="r"><code>expr_norm &lt;- calcNormFactors(expr_filt, method = &quot;TMM&quot;)</code></pre>
 </div>
 <div id="perform-subtyping" class="section level3">
 <h3>Perform subtyping</h3>
 <p>Perform CMS classification using inbuilt template.</p>
-<pre class="r"><code>CMS &lt;- CMScaller(emat = expr_norm$counts, RNAseq=TRUE, FDR=0.05); head(CMS)</code></pre>
-<p><img src="figure/CRLM_Subtyping.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
-Past versions of unnamed-chunk-7-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-7-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/8988bffe11720b72c7f357c9fcc8967d3823f834/docs/figure/CRLM_Subtyping.Rmd/unnamed-chunk-7-1.png" target="_blank">8988bff</a>
-</td>
-<td>
-Robin Wagner (UoM Laptop)
-</td>
-<td>
-2023-08-23
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<pre class="r"><code>CMS &lt;- CMScaller(emat = expr_filt$counts, RNAseq=TRUE, FDR=0.05); head(CMS)</code></pre>
+<p><img src="figure/CRLM_Subtyping.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre><code>
 CMS1 CMS2 CMS3 CMS4 &lt;NA&gt; 
    4    4    3   19   14 </code></pre>
@@ -1008,45 +1003,8 @@ designated iCMS2 genes. The reverse is true for iCMS3.</p>
 <pre><code>no corresponding entrez for symbol key(s) LY6G6F-LY6G6D; RAB5IF; RTF2; ATP5F1E; SINHCAF; AC004130.1; SMIM26; RETREG1; AL445524.1; DEPP1; AC020656.1; ATP5F1A; TENT5A; AP001816.1; DGLUCY; AC005833.1; SMIM31</code></pre>
 <pre><code>Warning: 17 identifiers not translated, NA&#39;s returned</code></pre>
 <p>Classify according to iCMS.</p>
-<pre class="r"><code>iCMS &lt;- CMScaller(expr_norm$counts, templates = iCMS_template, RNAseq = T, FDR = 0.05); head(iCMS)</code></pre>
-<p><img src="figure/CRLM_Subtyping.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
-Past versions of unnamed-chunk-9-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-9-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/8988bffe11720b72c7f357c9fcc8967d3823f834/docs/figure/CRLM_Subtyping.Rmd/unnamed-chunk-9-1.png" target="_blank">8988bff</a>
-</td>
-<td>
-Robin Wagner (UoM Laptop)
-</td>
-<td>
-2023-08-23
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<pre class="r"><code>iCMS &lt;- CMScaller(expr_filt$counts, templates = iCMS_template, RNAseq = T, FDR = 0.05); head(iCMS)</code></pre>
+<p><img src="figure/CRLM_Subtyping.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre><code>
 iCMS2 iCMS3  &lt;NA&gt; 
    18    15    11 </code></pre>
@@ -1070,7 +1028,7 @@ PDW486_LT        iCMS3 0.7684975 0.6398528 0.001000000 0.0017600</code></pre>
 5   PDO032_LT -0.4574141        2 intermediate
 6   PDW486_LT -0.4471963        3 intermediate</code></pre>
 <p>Visualise the association between subtypes and NK score.</p>
-<pre class="r"><code>plot_data &lt;- data.frame(sample = colnames(expr_norm$counts),
+<pre class="r"><code>plot_data &lt;- data.frame(sample = colnames(expr_filt$counts),
                         CMS = CMS$prediction,
                         iCMS = iCMS$prediction,
                         nk_score = nk_score$score); head(plot_data)</code></pre>
@@ -1091,66 +1049,7 @@ PDW486_LT        iCMS3 0.7684975 0.6398528 0.001000000 0.0017600</code></pre>
   scale_fill_manual(values = brewer.pal(8, &quot;Paired&quot;)) +
   labs(x = &quot;&quot;) +
   ggtitle(&quot;CMS&quot;)</code></pre>
-<p><img src="figure/CRLM_Subtyping.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
-Past versions of unnamed-chunk-11-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-11-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/90d10df7c4853e27a797633648d49f791ac4b18f/docs/figure/CRLM_Subtyping.Rmd/unnamed-chunk-11-1.png" target="_blank">90d10df</a>
-</td>
-<td>
-Robin Wagner (UoM Laptop)
-</td>
-<td>
-2023-08-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/086dc970d61f95110a4d5944db50fdab08da7d3f/docs/figure/CRLM_Subtyping.Rmd/unnamed-chunk-11-1.png" target="_blank">086dc97</a>
-</td>
-<td>
-Robin Wagner (UoM Laptop)
-</td>
-<td>
-2023-08-23
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/8988bffe11720b72c7f357c9fcc8967d3823f834/docs/figure/CRLM_Subtyping.Rmd/unnamed-chunk-11-1.png" target="_blank">8988bff</a>
-</td>
-<td>
-Robin Wagner (UoM Laptop)
-</td>
-<td>
-2023-08-23
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/CRLM_Subtyping.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>ggplot(plot_data, aes(x = iCMS, y = nk_score, fill = iCMS)) + 
   geom_boxplot() + 
   geom_point(position = position_dodge(0.9), color = &quot;gray20&quot;) + 
@@ -1161,55 +1060,7 @@ Robin Wagner (UoM Laptop)
   scale_fill_manual(values = brewer.pal(3, &quot;Paired&quot;)[2:3]) +
   labs(x = &quot;&quot;) +
   ggtitle(&quot;iCMS&quot;)</code></pre>
-<p><img src="figure/CRLM_Subtyping.Rmd/unnamed-chunk-11-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-2">
-Past versions of unnamed-chunk-11-2.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-11-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/8dadb03e70872d4b98eac843e2e250a72885a493/docs/figure/CRLM_Subtyping.Rmd/unnamed-chunk-11-2.png" target="_blank">8dadb03</a>
-</td>
-<td>
-Robin Wagner (UoM Laptop)
-</td>
-<td>
-2023-08-24
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/90d10df7c4853e27a797633648d49f791ac4b18f/docs/figure/CRLM_Subtyping.Rmd/unnamed-chunk-11-2.png" target="_blank">90d10df</a>
-</td>
-<td>
-Robin Wagner (UoM Laptop)
-</td>
-<td>
-2023-08-24
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/CRLM_Subtyping.Rmd/unnamed-chunk-10-2.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
