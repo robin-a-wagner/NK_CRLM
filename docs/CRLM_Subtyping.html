@@ -521,15 +521,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtree086dc970d61f95110a4d5944db50fdab08da7d3ftargetblank086dc97a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtree5f806afd4a0e3332845dca016ce51f0d60a3547atargetblank5f806afa">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/086dc970d61f95110a4d5944db50fdab08da7d3f" target="_blank">086dc97</a>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/5f806afd4a0e3332845dca016ce51f0d60a3547a" target="_blank">5f806af</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtree086dc970d61f95110a4d5944db50fdab08da7d3ftargetblank086dc97a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtree5f806afd4a0e3332845dca016ce51f0d60a3547atargetblank5f806afa"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -539,7 +539,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/086dc970d61f95110a4d5944db50fdab08da7d3f" target="_blank">086dc97</a>.
+<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/5f806afd4a0e3332845dca016ce51f0d60a3547a" target="_blank">5f806af</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -611,6 +611,41 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/5f806afd4a0e3332845dca016ce51f0d60a3547a/analysis/CRLM_Subtyping.Rmd" target="_blank">5f806af</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-24
+</td>
+<td>
+Added stat tests to final subtype boxplots, had to pull apart into two
+graphs
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/robin-a-wagner/NK_CRLM/82af4bd781dd552f2c31b7f9fd2876d0da574891/docs/CRLM_Subtyping.html" target="_blank">82af4bd</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-24
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -762,7 +797,8 @@ using the CMScaller package.</p>
 <pre class="r"><code>library(dplyr)
 library(CMScaller)
 library(ggplot2)
-library(RColorBrewer)</code></pre>
+library(RColorBrewer)
+library(ggpubr)</code></pre>
 <div id="prepare-data" class="section level3">
 <h3>Prepare data</h3>
 <p>Read in and prepare the raw counts data for the 58 samples.</p>
@@ -934,26 +970,26 @@ PDW486_LT        iCMS3 0.7684975 0.6398528 0.001000000 0.0017600</code></pre>
 <pre class="r"><code>plot_data &lt;- data.frame(sample = colnames(expr_norm$counts),
                         CMS = CMS$prediction,
                         iCMS = iCMS$prediction,
-                        nk_score = nk_score$score) %&gt;%
-  tidyr::gather(key = system, 
-         value = subtype,
-         c(&quot;CMS&quot;, &quot;iCMS&quot;)); head(plot_data)</code></pre>
-<pre><code>Warning: attributes are not identical across measure variables; they will be
-dropped</code></pre>
-<pre><code>       sample   nk_score system subtype
-1    JV388_LT -0.4628994    CMS    CMS3
-2    KG078_LT -0.4401634    CMS    &lt;NA&gt;
-3 PCC002_LT1a -0.4714542    CMS    &lt;NA&gt;
-4 PCC002_LT1b -0.4519359    CMS    CMS4
-5   PDO032_LT -0.4574141    CMS    CMS4
-6   PDW486_LT -0.4471963    CMS    CMS4</code></pre>
-<pre class="r"><code>ggplot(plot_data, aes(x = subtype, y = nk_score, fill = subtype)) + 
+                        nk_score = nk_score$score); head(plot_data)</code></pre>
+<pre><code>       sample  CMS  iCMS   nk_score
+1    JV388_LT CMS3  &lt;NA&gt; -0.4628994
+2    KG078_LT &lt;NA&gt;  &lt;NA&gt; -0.4401634
+3 PCC002_LT1a &lt;NA&gt; iCMS2 -0.4714542
+4 PCC002_LT1b CMS4 iCMS2 -0.4519359
+5   PDO032_LT CMS4  &lt;NA&gt; -0.4574141
+6   PDW486_LT CMS4 iCMS3 -0.4471963</code></pre>
+<pre class="r"><code>par(mfrow = c(2,1))
+
+ggplot(plot_data, aes(x = CMS, y = nk_score, fill = CMS)) + 
   geom_boxplot() + 
   geom_point(position = position_dodge(0.9), color = &quot;gray20&quot;) + 
-  facet_wrap(~system, scales = &quot;free_x&quot;) +
+  stat_compare_means(method = &quot;anova&quot;) +
   theme_bw() +
-  theme(text = element_text(size = 15)) +
-  scale_fill_manual(values = brewer.pal(8, &quot;Paired&quot;))</code></pre>
+  theme(text = element_text(size = 15),
+        legend.position = &quot;none&quot;) +
+  scale_fill_manual(values = brewer.pal(8, &quot;Paired&quot;)) +
+  labs(x = &quot;&quot;) +
+  ggtitle(&quot;CMS&quot;)</code></pre>
 <p><img src="figure/CRLM_Subtyping.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
@@ -1003,6 +1039,17 @@ Robin Wagner (UoM Laptop)
 </table>
 </div>
 </div>
+<pre class="r"><code>ggplot(plot_data, aes(x = iCMS, y = nk_score, fill = iCMS)) + 
+  geom_boxplot() + 
+  geom_point(position = position_dodge(0.9), color = &quot;gray20&quot;) + 
+  stat_compare_means(method = &quot;t.test&quot;, comparisons = list(c(&quot;iCMS2&quot;, &quot;iCMS3&quot;))) +
+  theme_bw()  +
+  theme(text = element_text(size = 15),
+        legend.position = &quot;none&quot;) +
+  scale_fill_manual(values = brewer.pal(8, &quot;Paired&quot;)) +
+  labs(x = &quot;&quot;) +
+  ggtitle(&quot;iCMS&quot;)</code></pre>
+<p><img src="figure/CRLM_Subtyping.Rmd/unnamed-chunk-11-2.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1030,25 +1077,27 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] edgeR_3.42.4       limma_3.56.2       RColorBrewer_1.1-3 ggplot2_3.4.3     
-[5] CMScaller_0.99.2   dplyr_1.1.2        workflowr_1.7.1   
+[1] edgeR_3.42.4       limma_3.56.2       ggpubr_0.6.0       RColorBrewer_1.1-3
+[5] ggplot2_3.4.3      CMScaller_0.99.2   dplyr_1.1.2        workflowr_1.7.1   
 
 loaded via a namespace (and not attached):
- [1] tidyr_1.3.0       sass_0.4.7        utf8_1.2.3        generics_0.1.3   
- [5] lattice_0.21-8    stringi_1.7.12    digest_0.6.33     magrittr_2.0.3   
- [9] evaluate_0.21     grid_4.3.1        fastmap_1.1.1     rprojroot_2.0.3  
-[13] jsonlite_1.8.7    processx_3.8.2    whisker_0.4.1     ps_1.7.5         
-[17] promises_1.2.1    httr_1.4.7        purrr_1.0.2       fansi_1.0.4      
-[21] scales_1.2.1      jquerylib_0.1.4   cli_3.6.1         rlang_1.1.1      
-[25] munsell_0.5.0     withr_2.5.0       cachem_1.0.8      yaml_2.3.7       
-[29] tools_4.3.1       colorspace_2.1-0  locfit_1.5-9.8    httpuv_1.6.11    
-[33] vctrs_0.6.3       R6_2.5.1          lifecycle_1.0.3   git2r_0.32.0     
-[37] stringr_1.5.0     fs_1.6.3          pkgconfig_2.0.3   callr_3.7.3      
-[41] pillar_1.9.0      bslib_0.5.1       later_1.3.1       gtable_0.3.4     
-[45] glue_1.6.2        Rcpp_1.0.11       highr_0.10        xfun_0.40        
-[49] tibble_3.2.1      tidyselect_1.2.0  rstudioapi_0.15.0 knitr_1.43       
-[53] farver_2.1.1      htmltools_0.5.6   labeling_0.4.2    rmarkdown_2.24   
-[57] compiler_4.3.1    getPass_0.2-2    </code></pre>
+ [1] gtable_0.3.4      xfun_0.40         bslib_0.5.1       processx_3.8.2   
+ [5] rstatix_0.7.2     lattice_0.21-8    callr_3.7.3       vctrs_0.6.3      
+ [9] tools_4.3.1       ps_1.7.5          generics_0.1.3    tibble_3.2.1     
+[13] fansi_1.0.4       highr_0.10        pkgconfig_2.0.3   lifecycle_1.0.3  
+[17] compiler_4.3.1    farver_2.1.1      stringr_1.5.0     git2r_0.32.0     
+[21] munsell_0.5.0     getPass_0.2-2     carData_3.0-5     httpuv_1.6.11    
+[25] htmltools_0.5.6   sass_0.4.7        yaml_2.3.7        later_1.3.1      
+[29] pillar_1.9.0      car_3.1-2         jquerylib_0.1.4   whisker_0.4.1    
+[33] tidyr_1.3.0       cachem_1.0.8      abind_1.4-5       tidyselect_1.2.0 
+[37] locfit_1.5-9.8    digest_0.6.33     stringi_1.7.12    purrr_1.0.2      
+[41] labeling_0.4.2    rprojroot_2.0.3   fastmap_1.1.1     grid_4.3.1       
+[45] colorspace_2.1-0  cli_3.6.1         magrittr_2.0.3    utf8_1.2.3       
+[49] broom_1.0.5       withr_2.5.0       scales_1.2.1      promises_1.2.1   
+[53] backports_1.4.1   rmarkdown_2.24    httr_1.4.7        ggsignif_0.6.4   
+[57] evaluate_0.21     knitr_1.43        rlang_1.1.1       Rcpp_1.0.11      
+[61] glue_1.6.2        rstudioapi_0.15.0 jsonlite_1.8.7    R6_2.5.1         
+[65] fs_1.6.3         </code></pre>
 </div>
 </div>
 </div>
