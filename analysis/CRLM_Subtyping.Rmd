@@ -114,8 +114,6 @@ plot_data <- data.frame(sample = colnames(expr_norm$counts),
                         iCMS = iCMS$prediction,
                         nk_score = nk_score$score); head(plot_data)
 
-par(mfrow = c(2,1))
-
 ggplot(plot_data, aes(x = CMS, y = nk_score, fill = CMS)) + 
   geom_boxplot() + 
   geom_point(position = position_dodge(0.9), color = "gray20") + 
