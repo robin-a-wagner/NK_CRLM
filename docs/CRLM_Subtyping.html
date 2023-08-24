@@ -521,15 +521,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtree159e2050c9112927c2192fa269a7181e9ef456d2targetblank159e205a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtree5431bf0d32129b1f5c1b87fdacd572262a3fafe8targetblank5431bf0a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/159e2050c9112927c2192fa269a7181e9ef456d2" target="_blank">159e205</a>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/5431bf0d32129b1f5c1b87fdacd572262a3fafe8" target="_blank">5431bf0</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtree159e2050c9112927c2192fa269a7181e9ef456d2targetblank159e205a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtree5431bf0d32129b1f5c1b87fdacd572262a3fafe8targetblank5431bf0a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -539,7 +539,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/159e2050c9112927c2192fa269a7181e9ef456d2" target="_blank">159e205</a>.
+<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/5431bf0d32129b1f5c1b87fdacd572262a3fafe8" target="_blank">5431bf0</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -611,6 +611,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/5431bf0d32129b1f5c1b87fdacd572262a3fafe8/analysis/CRLM_Subtyping.Rmd" target="_blank">5431bf0</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-25
+</td>
+<td>
+added some commentary re CMS + iCMS
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/robin-a-wagner/NK_CRLM/051989fbf1d09bd0fc09bdf760ebd60980c1ffda/docs/CRLM_Subtyping.html" target="_blank">051989f</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-25
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -969,6 +1003,43 @@ analysis.</p>
 <p>Perform CMS classification using inbuilt template.</p>
 <pre class="r"><code>CMS &lt;- CMScaller(emat = expr_filt$counts, RNAseq=TRUE, FDR=0.05); head(CMS)</code></pre>
 <p><img src="figure/CRLM_Subtyping.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/051989fbf1d09bd0fc09bdf760ebd60980c1ffda/docs/figure/CRLM_Subtyping.Rmd/unnamed-chunk-6-1.png" target="_blank">051989f</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre><code>
 CMS1 CMS2 CMS3 CMS4 &lt;NA&gt; 
    4    4    3   19   14 </code></pre>
@@ -1005,6 +1076,43 @@ designated iCMS2 genes. The reverse is true for iCMS3.</p>
 <p>Classify according to iCMS.</p>
 <pre class="r"><code>iCMS &lt;- CMScaller(expr_filt$counts, templates = iCMS_template, RNAseq = T, FDR = 0.05); head(iCMS)</code></pre>
 <p><img src="figure/CRLM_Subtyping.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/051989fbf1d09bd0fc09bdf760ebd60980c1ffda/docs/figure/CRLM_Subtyping.Rmd/unnamed-chunk-8-1.png" target="_blank">051989f</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre><code>
 iCMS2 iCMS3  &lt;NA&gt; 
    18    15    11 </code></pre>
@@ -1050,6 +1158,47 @@ PDW486_LT        iCMS3 0.7684975 0.6398528 0.001000000 0.0017600</code></pre>
   labs(x = &quot;&quot;) +
   ggtitle(&quot;CMS&quot;)</code></pre>
 <p><img src="figure/CRLM_Subtyping.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-1">
+Past versions of unnamed-chunk-10-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/051989fbf1d09bd0fc09bdf760ebd60980c1ffda/docs/figure/CRLM_Subtyping.Rmd/unnamed-chunk-10-1.png" target="_blank">051989f</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The above results are consistent with expectations. We expect a large
+proportion of samples will go unclassified as the CMS system is
+poorly-tailored to metastases. Nonetheless, we expect there to be a
+higher level of immune infiltration in CMS1 and CMS4 tumours.</p>
 <pre class="r"><code>ggplot(plot_data, aes(x = iCMS, y = nk_score, fill = iCMS)) + 
   geom_boxplot() + 
   geom_point(position = position_dodge(0.9), color = &quot;gray20&quot;) + 
@@ -1060,7 +1209,84 @@ PDW486_LT        iCMS3 0.7684975 0.6398528 0.001000000 0.0017600</code></pre>
   scale_fill_manual(values = brewer.pal(3, &quot;Paired&quot;)[2:3]) +
   labs(x = &quot;&quot;) +
   ggtitle(&quot;iCMS&quot;)</code></pre>
-<p><img src="figure/CRLM_Subtyping.Rmd/unnamed-chunk-10-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/CRLM_Subtyping.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
+Past versions of unnamed-chunk-11-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/051989fbf1d09bd0fc09bdf760ebd60980c1ffda/docs/figure/CRLM_Subtyping.Rmd/unnamed-chunk-11-1.png" target="_blank">051989f</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-25
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/90d10df7c4853e27a797633648d49f791ac4b18f/docs/figure/CRLM_Subtyping.Rmd/unnamed-chunk-11-1.png" target="_blank">90d10df</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-24
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/086dc970d61f95110a4d5944db50fdab08da7d3f/docs/figure/CRLM_Subtyping.Rmd/unnamed-chunk-11-1.png" target="_blank">086dc97</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-23
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/8988bffe11720b72c7f357c9fcc8967d3823f834/docs/figure/CRLM_Subtyping.Rmd/unnamed-chunk-11-1.png" target="_blank">8988bff</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>These results are also consistent with expectations, because we know
+that iCMS3 tumours resemble immune-active MSI-H tumours. However, there
+are clearly both NK high and low samples in iCMS3. This is consistent
+with the presence of fribrosis + associated immune infiltration being
+orthogonal to intrinsic CMS. How can we measure the fibrosis to see
+whether that dilineates the high and low samples? It’s not clear how
+Joanito et al. do so.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
