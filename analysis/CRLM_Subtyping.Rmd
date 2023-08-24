@@ -117,6 +117,12 @@ ggplot(plot_data, aes(x = CMS, y = nk_score, fill = CMS)) +
   labs(x = "") +
   ggtitle("CMS")
 
+```
+
+The above results are consistent with expectations. We expect a large proportion of samples will go unclassified as the CMS system is poorly-tailored to metastases. Nonetheless, we expect there to be a higher level of immune infiltration in CMS1 and CMS4 tumours. 
+
+```{r}
+
 ggplot(plot_data, aes(x = iCMS, y = nk_score, fill = iCMS)) + 
   geom_boxplot() + 
   geom_point(position = position_dodge(0.9), color = "gray20") + 
@@ -129,3 +135,6 @@ ggplot(plot_data, aes(x = iCMS, y = nk_score, fill = iCMS)) +
   ggtitle("iCMS")
 
 ```
+
+These results are also consistent with expectations, because we know that iCMS3 tumours resemble immune-active MSI-H tumours. However, there are clearly both NK high and low samples in iCMS3. This is consistent with the presence of fribrosis + associated immune infiltration being orthogonal to intrinsic CMS. How can we measure the fibrosis to see whether that dilineates the high and low samples? It's not clear how Joanito et al. do so. 
+
