@@ -390,7 +390,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2023-08-23
+<strong>Last updated:</strong> 2023-08-28
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -408,7 +408,7 @@ title="This is the local directory in which the code in this file was executed."
 This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
 analysis was created with <a
   href="https://github.com/workflowr/workflowr">workflowr</a> (version
-1.7.0). The <em>Checks</em> tab describes the reproducibility checks
+1.7.1). The <em>Checks</em> tab describes the reproducibility checks
 that were applied when the results were created. The <em>Past
 versions</em> tab lists the development history.
 </p>
@@ -521,15 +521,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtree7e4dd2d6ee6689d2081f3299557d77432b8bd9aetargetblank7e4dd2da">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtree682108ffc308abd33335ad0cb0bbb4813cb5f7eftargetblank682108fa">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/7e4dd2d6ee6689d2081f3299557d77432b8bd9ae" target="_blank">7e4dd2d</a>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/682108ffc308abd33335ad0cb0bbb4813cb5f7ef" target="_blank">682108f</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtree7e4dd2d6ee6689d2081f3299557d77432b8bd9aetargetblank7e4dd2da"
+id="strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtree682108ffc308abd33335ad0cb0bbb4813cb5f7eftargetblank682108fa"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -539,7 +539,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/7e4dd2d6ee6689d2081f3299557d77432b8bd9ae" target="_blank">7e4dd2d</a>.
+<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/682108ffc308abd33335ad0cb0bbb4813cb5f7ef" target="_blank">682108f</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -558,12 +558,18 @@ Ignored files:
 
 Untracked files:
     Untracked:  data/20230822_Shembrey_NK_Signature.csv
+    Untracked:  data/20230824_deSouseeMelo_CCS3_Signature.csv
     Untracked:  data/DGEList_3prime_Org_171samples_rm4Tum_9Untreated.RDS
     Untracked:  data/DGEList_Filtered_TCGA_COAD_ForCarolyn.RDS
+    Untracked:  data/Dunne_2016_Tumor_Region_Class_Genes.csv
     Untracked:  data/Genomics_WES_WGS_ProteinCoding_ImpactHighModerate_Canonicals_UniqueGenes.txt
     Untracked:  data/Hollande_DGEList_Tum_Raw.RDS
+    Untracked:  data/iCMS_genes.csv
     Untracked:  data/iCMS_template.csv
     Untracked:  output/20230823_Shembrey_NK_Score_Hollande_CRLM.csv
+
+Unstaged changes:
+    Modified:   analysis/CRLM_Subtyping.Rmd
 
 </code></pre>
 <p>
@@ -609,6 +615,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/682108ffc308abd33335ad0cb0bbb4813cb5f7ef/analysis/NK_Scoring.Rmd" target="_blank">682108f</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-28
+</td>
+<td>
+added plots to visualise filtration
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/robin-a-wagner/NK_CRLM/4a640ba25c488e076a6fc4cfb6371f6980067dc5/docs/NK_Scoring.html" target="_blank">4a640ba</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -916,11 +956,13 @@ CRC-specific NK signature using singscore.</p>
 library(edgeR) 
 library(singscore)
 library(ggplot2)
-library(RColorBrewer)</code></pre>
+library(RColorBrewer)
+library(ggpubr)</code></pre>
 </div>
 <div id="prepare-data" class="section level3">
 <h3>Prepare data</h3>
-<p>Read in and prepare the raw counts data for the 58 samples.</p>
+<p>Read in and prepare the raw counts data for the 58 samples. Data
+stored in limma DGE List object.</p>
 <pre class="r"><code>expr &lt;- readRDS(&quot;data/Hollande_DGEList_Tum_Raw.RDS&quot;); dim(expr)</code></pre>
 <pre><code>[1] 25702    58</code></pre>
 <p>Remove duplicated sample.</p>
@@ -948,12 +990,59 @@ filtering.</p>
 4       CLIC3     9022
 5      CX3CR1     1524
 6      DRAXIN   374946</code></pre>
-<p>Filter out lowly-expressed genes.</p>
+<p>Filter out lowly-expressed genes but preserve signature genes for
+scoring.</p>
 <pre class="r"><code>keep &lt;- filterByExpr(expr$counts)</code></pre>
 <pre><code>No group or design set. Assuming all samples belong to one group.</code></pre>
 <pre class="r"><code>keep2 &lt;- rownames(expr$counts) %in% nk_sig$ENTREZID
 expr_filt &lt;- expr[keep | keep2, ]; dim(expr_filt)</code></pre>
 <pre><code>[1] 9930   44</code></pre>
+<p>Visualise the effects of filtration.</p>
+<pre class="r"><code>lcpm &lt;- data.frame(edgeR::cpm(expr, log = T))
+lcpm_filt &lt;- data.frame(edgeR::cpm(expr_filt, log = T))
+
+lcpm &lt;- lcpm %&gt;%
+  mutate(gene = rownames(lcpm)) %&gt;%
+  tidyr::gather(key = sample, value = expr, -gene); head(lcpm)</code></pre>
+<pre><code>       gene   sample       expr
+1    653635 JV388_LT  5.6055739
+2 100422834 JV388_LT -0.2978505
+3    645520 JV388_LT -0.2978505
+4     79501 JV388_LT -0.2978505
+5    729737 JV388_LT -0.2978505
+6 100507658 JV388_LT -0.2978505</code></pre>
+<pre class="r"><code>ggplot(lcpm, aes(x = expr, color = sample)) + 
+  geom_density() +
+  guides(color = &quot;none&quot;) +
+  theme_bw() +
+  theme(text = element_text(size = 12))</code></pre>
+<p><img src="figure/NK_Scoring.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>lcpm_filt &lt;- lcpm_filt %&gt;%
+  mutate(gene = rownames(lcpm_filt)) %&gt;%
+  tidyr::gather(key = sample, value = expr, -gene); head(lcpm_filt)</code></pre>
+<pre><code>       gene   sample      expr
+1    653635 JV388_LT  5.605574
+2 100132287 JV388_LT  3.961216
+3 100131754 JV388_LT 12.430729
+4 100133331 JV388_LT  3.136356
+5     26155 JV388_LT  3.320475
+6    339451 JV388_LT  1.850520</code></pre>
+<pre class="r"><code>lcpm_plot &lt;- ggplot(lcpm, aes(x = expr, color = sample)) + 
+  geom_density() +
+  guides(color = &quot;none&quot;) +
+  theme_bw() +
+  theme(text = element_text(size = 12)) +
+  ggtitle(&quot;Pre-Filtration&quot;)
+
+lcpm_filt_plot &lt;- ggplot(lcpm_filt, aes(x = expr, color = sample)) + 
+  geom_density() +
+  guides(color = &quot;none&quot;) +
+  theme_bw() +
+  theme(text = element_text(size = 12)) +
+  ggtitle(&quot;Post-Filtration&quot;)
+
+ggarrange(lcpm_plot, lcpm_filt_plot)</code></pre>
+<p><img src="figure/NK_Scoring.Rmd/unnamed-chunk-7-2.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Normalise for library size.</p>
 <pre class="r"><code>expr_norm &lt;- calcNormFactors(expr_filt, method = &quot;TMM&quot;)</code></pre>
 </div>
@@ -988,99 +1077,7 @@ scoring with singscore.</p>
   scale_fill_manual(values = brewer.pal(3, &quot;Paired&quot;)) + 
   labs(x = &quot;&quot;) +
   theme(text = element_text(size = 15))</code></pre>
-<p><img src="figure/NK_Scoring.Rmd/unnamed-chunk-11-1.png" width="576" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
-Past versions of unnamed-chunk-11-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-11-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/9601bf615e782012fd9bcbd7652475877c655f6e/docs/figure/NK_Scoring.Rmd/unnamed-chunk-11-1.png" target="_blank">9601bf6</a>
-</td>
-<td>
-Robin Wagner (UoM Laptop)
-</td>
-<td>
-2023-08-23
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/f7562c1433e4794bd67ab8939b606bc118d598d6/docs/figure/NK_Scoring.Rmd/unnamed-chunk-11-1.png" target="_blank">f7562c1</a>
-</td>
-<td>
-Robin Wagner (UoM Laptop)
-</td>
-<td>
-2023-08-23
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/823300304f1a955e27c350c78e6a205752bc672c/docs/figure/NK_Scoring.Rmd/unnamed-chunk-11-1.png" target="_blank">8233003</a>
-</td>
-<td>
-Robin Wagner (UoM Laptop)
-</td>
-<td>
-2023-08-23
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/8808d0d8b64debca428c3c14c7488e723b60e5b0/docs/figure/NK_Scoring.Rmd/unnamed-chunk-11-1.png" target="_blank">8808d0d</a>
-</td>
-<td>
-Robin Wagner (UoM Laptop)
-</td>
-<td>
-2023-08-23
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/b0bf4584e29541d01a2e7702fe0e70b79f1ce025/docs/figure/NK_Scoring.Rmd/unnamed-chunk-11-1.png" target="_blank">b0bf458</a>
-</td>
-<td>
-Robin Wagner (UoM Laptop)
-</td>
-<td>
-2023-08-23
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/6a26401677b7d3a0f7d33e9f7b623d9573be9783/docs/figure/NK_Scoring.Rmd/unnamed-chunk-11-1.png" target="_blank">6a26401</a>
-</td>
-<td>
-Robin Wagner (UoM Laptop)
-</td>
-<td>
-2023-08-23
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/NK_Scoring.Rmd/unnamed-chunk-12-1.png" width="576" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1108,58 +1105,61 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] RColorBrewer_1.1-3 ggplot2_3.4.3      singscore_1.20.0   edgeR_3.42.4      
-[5] limma_3.56.2       dplyr_1.1.2        workflowr_1.7.0   
+[1] ggpubr_0.6.0       RColorBrewer_1.1-3 ggplot2_3.4.3      singscore_1.20.0  
+[5] edgeR_3.42.4       limma_3.56.2       dplyr_1.1.2        workflowr_1.7.1   
 
 loaded via a namespace (and not attached):
- [1] DBI_1.1.3                   bitops_1.0-7               
- [3] GSEABase_1.62.0             rlang_1.1.1                
- [5] magrittr_2.0.3              git2r_0.32.0               
- [7] matrixStats_1.0.0           compiler_4.3.1             
- [9] RSQLite_2.3.1               getPass_0.2-2              
-[11] png_0.1-8                   callr_3.7.3                
-[13] vctrs_0.6.3                 reshape2_1.4.4             
-[15] stringr_1.5.0               pkgconfig_2.0.3            
-[17] crayon_1.5.2                fastmap_1.1.1              
-[19] XVector_0.40.0              labeling_0.4.2             
-[21] utf8_1.2.3                  promises_1.2.1             
-[23] rmarkdown_2.24              graph_1.78.0               
-[25] ps_1.7.5                    purrr_1.0.2                
-[27] bit_4.0.5                   xfun_0.40                  
-[29] zlibbioc_1.46.0             cachem_1.0.8               
-[31] GenomeInfoDb_1.36.1         jsonlite_1.8.7             
-[33] blob_1.2.4                  highr_0.10                 
-[35] later_1.3.1                 DelayedArray_0.26.7        
-[37] R6_2.5.1                    bslib_0.5.1                
-[39] stringi_1.7.12              GenomicRanges_1.52.0       
-[41] jquerylib_0.1.4             Rcpp_1.0.11                
-[43] SummarizedExperiment_1.30.2 knitr_1.43                 
-[45] IRanges_2.34.1              httpuv_1.6.11              
-[47] Matrix_1.6-1                tidyselect_1.2.0           
-[49] rstudioapi_0.15.0           abind_1.4-5                
-[51] yaml_2.3.7                  processx_3.8.2             
-[53] lattice_0.21-8              tibble_3.2.1               
-[55] plyr_1.8.8                  Biobase_2.60.0             
-[57] withr_2.5.0                 KEGGREST_1.40.0            
-[59] evaluate_0.21               Biostrings_2.68.1          
-[61] pillar_1.9.0                MatrixGenerics_1.12.3      
-[63] whisker_0.4.1               stats4_4.3.1               
-[65] generics_0.1.3              rprojroot_2.0.3            
-[67] RCurl_1.98-1.12             S4Vectors_0.38.1           
-[69] munsell_0.5.0               scales_1.2.1               
-[71] xtable_1.8-4                glue_1.6.2                 
-[73] tools_4.3.1                 annotate_1.78.0            
-[75] locfit_1.5-9.8              fs_1.6.3                   
-[77] XML_3.99-0.14               grid_4.3.1                 
-[79] tidyr_1.3.0                 AnnotationDbi_1.62.2       
-[81] colorspace_2.1-0            GenomeInfoDbData_1.2.10    
-[83] cli_3.6.1                   fansi_1.0.4                
-[85] S4Arrays_1.0.5              gtable_0.3.3               
-[87] sass_0.4.7                  digest_0.6.33              
-[89] BiocGenerics_0.46.0         farver_2.1.1               
-[91] memoise_2.0.1               htmltools_0.5.6            
-[93] lifecycle_1.0.3             httr_1.4.7                 
-[95] bit64_4.0.5                </code></pre>
+  [1] DBI_1.1.3                   bitops_1.0-7               
+  [3] GSEABase_1.62.0             rlang_1.1.1                
+  [5] magrittr_2.0.3              git2r_0.32.0               
+  [7] matrixStats_1.0.0           compiler_4.3.1             
+  [9] RSQLite_2.3.1               getPass_0.2-2              
+ [11] png_0.1-8                   callr_3.7.3                
+ [13] vctrs_0.6.3                 reshape2_1.4.4             
+ [15] stringr_1.5.0               pkgconfig_2.0.3            
+ [17] crayon_1.5.2                fastmap_1.1.1              
+ [19] backports_1.4.1             XVector_0.40.0             
+ [21] labeling_0.4.2              utf8_1.2.3                 
+ [23] promises_1.2.1              rmarkdown_2.24             
+ [25] graph_1.78.0                ps_1.7.5                   
+ [27] purrr_1.0.2                 bit_4.0.5                  
+ [29] xfun_0.40                   zlibbioc_1.46.0            
+ [31] cachem_1.0.8                GenomeInfoDb_1.36.1        
+ [33] jsonlite_1.8.7              blob_1.2.4                 
+ [35] highr_0.10                  later_1.3.1                
+ [37] DelayedArray_0.26.7         broom_1.0.5                
+ [39] R6_2.5.1                    bslib_0.5.1                
+ [41] stringi_1.7.12              car_3.1-2                  
+ [43] GenomicRanges_1.52.0        jquerylib_0.1.4            
+ [45] Rcpp_1.0.11                 SummarizedExperiment_1.30.2
+ [47] knitr_1.43                  IRanges_2.34.1             
+ [49] httpuv_1.6.11               Matrix_1.6-1               
+ [51] tidyselect_1.2.0            rstudioapi_0.15.0          
+ [53] abind_1.4-5                 yaml_2.3.7                 
+ [55] processx_3.8.2              lattice_0.21-8             
+ [57] tibble_3.2.1                plyr_1.8.8                 
+ [59] Biobase_2.60.0              withr_2.5.0                
+ [61] KEGGREST_1.40.0             evaluate_0.21              
+ [63] Biostrings_2.68.1           pillar_1.9.0               
+ [65] carData_3.0-5               MatrixGenerics_1.12.3      
+ [67] whisker_0.4.1               stats4_4.3.1               
+ [69] generics_0.1.3              rprojroot_2.0.3            
+ [71] RCurl_1.98-1.12             S4Vectors_0.38.1           
+ [73] munsell_0.5.0               scales_1.2.1               
+ [75] xtable_1.8-4                glue_1.6.2                 
+ [77] tools_4.3.1                 annotate_1.78.0            
+ [79] locfit_1.5-9.8              ggsignif_0.6.4             
+ [81] fs_1.6.3                    XML_3.99-0.14              
+ [83] cowplot_1.1.1               grid_4.3.1                 
+ [85] tidyr_1.3.0                 AnnotationDbi_1.62.2       
+ [87] colorspace_2.1-0            GenomeInfoDbData_1.2.10    
+ [89] cli_3.6.1                   fansi_1.0.4                
+ [91] S4Arrays_1.0.5              gtable_0.3.4               
+ [93] rstatix_0.7.2               sass_0.4.7                 
+ [95] digest_0.6.33               BiocGenerics_0.46.0        
+ [97] farver_2.1.1                memoise_2.0.1              
+ [99] htmltools_0.5.6             lifecycle_1.0.3            
+[101] httr_1.4.7                  bit64_4.0.5                </code></pre>
 </div>
 </div>
 </div>
