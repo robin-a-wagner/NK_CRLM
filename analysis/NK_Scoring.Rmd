@@ -83,12 +83,6 @@ lcpm <- lcpm %>%
   mutate(gene = rownames(lcpm)) %>%
   tidyr::gather(key = sample, value = expr, -gene); head(lcpm)
 
-ggplot(lcpm, aes(x = expr, color = sample)) + 
-  geom_density() +
-  guides(color = "none") +
-  theme_bw() +
-  theme(text = element_text(size = 12))
- 
 lcpm_filt <- lcpm_filt %>%
   mutate(gene = rownames(lcpm_filt)) %>%
   tidyr::gather(key = sample, value = expr, -gene); head(lcpm_filt)
@@ -98,14 +92,16 @@ lcpm_plot <- ggplot(lcpm, aes(x = expr, color = sample)) +
   guides(color = "none") +
   theme_bw() +
   theme(text = element_text(size = 12)) +
-  ggtitle("Pre-Filtration")
+  ggtitle("Pre-Filtration") +
+  labs(x = "expr (logCPM)")
 
 lcpm_filt_plot <- ggplot(lcpm_filt, aes(x = expr, color = sample)) + 
   geom_density() +
   guides(color = "none") +
   theme_bw() +
   theme(text = element_text(size = 12)) +
-  ggtitle("Post-Filtration")
+  ggtitle("Post-Filtration") +
+  labs(x = "expr (logCPM)")
 
 ggarrange(lcpm_plot, lcpm_filt_plot)
 
@@ -116,6 +112,41 @@ Normalise for library size.
 ```{r}
 
 expr_norm <- calcNormFactors(expr_filt, method = "TMM")
+
+```
+
+Visualise effect of library normalisation. 
+
+```{r}
+
+lcpm_norm <- data.frame(edgeR::cpm(expr_norm, log = T))
+lcpm_norm <- lcpm_norm %>%
+  mutate(gene = rownames(lcpm_norm)) %>%
+  tidyr::gather(key = sample, 
+         value = expr, 
+         -gene); head(lcpm_norm)
+
+lcpm_filt_boxplot <- ggplot(lcpm_filt, aes(x = sample, y = expr, fill = sample)) + 
+  geom_boxplot() +
+  guides(fill = "none") +
+  theme_bw() +
+  theme(text = element_text(size = 12),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank()) + 
+  ggtitle("Pre-TMM Normalisation") +
+  labs(x = "expr (logCPM)")
+
+lcpm_norm_boxplot <- ggplot(lcpm_norm, aes(x = sample, y = expr, fill = sample)) + 
+  geom_boxplot() +
+  guides(fill = "none") +
+  theme_bw() +
+  theme(text = element_text(size = 12),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank()) + 
+  ggtitle("Post-TMM Normalisation") +
+  labs(x = "expr (logCPM)")
+
+ggarrange(lcpm_filt_boxplot, lcpm_norm_boxplot)
 
 ```
 
