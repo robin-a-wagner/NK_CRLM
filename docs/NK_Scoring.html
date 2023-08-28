@@ -521,15 +521,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtree682108ffc308abd33335ad0cb0bbb4813cb5f7eftargetblank682108fa">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtreee4911274b366d9575f06b97106970ccb228d1451targetblanke491127a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/682108ffc308abd33335ad0cb0bbb4813cb5f7ef" target="_blank">682108f</a>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/e4911274b366d9575f06b97106970ccb228d1451" target="_blank">e491127</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtree682108ffc308abd33335ad0cb0bbb4813cb5f7eftargetblank682108fa"
+id="strongRepositoryversionstrongahrefhttpsgithubcomrobinawagnerNKCRLMtreee4911274b366d9575f06b97106970ccb228d1451targetblanke491127a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -539,7 +539,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/682108ffc308abd33335ad0cb0bbb4813cb5f7ef" target="_blank">682108f</a>.
+<a href="https://github.com/robin-a-wagner/NK_CRLM/tree/e4911274b366d9575f06b97106970ccb228d1451" target="_blank">e491127</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -615,6 +615,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/e4911274b366d9575f06b97106970ccb228d1451/analysis/NK_Scoring.Rmd" target="_blank">e491127</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-28
+</td>
+<td>
+added plots to visualise effect of TMM normalisation
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/robin-a-wagner/NK_CRLM/5f49352a7fb4bb23727f198f68c0e3ef3528cf76/docs/NK_Scoring.html" target="_blank">5f49352</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-28
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1011,12 +1045,6 @@ lcpm &lt;- lcpm %&gt;%
 4     79501 JV388_LT -0.2978505
 5    729737 JV388_LT -0.2978505
 6 100507658 JV388_LT -0.2978505</code></pre>
-<pre class="r"><code>ggplot(lcpm, aes(x = expr, color = sample)) + 
-  geom_density() +
-  guides(color = &quot;none&quot;) +
-  theme_bw() +
-  theme(text = element_text(size = 12))</code></pre>
-<p><img src="figure/NK_Scoring.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>lcpm_filt &lt;- lcpm_filt %&gt;%
   mutate(gene = rownames(lcpm_filt)) %&gt;%
   tidyr::gather(key = sample, value = expr, -gene); head(lcpm_filt)</code></pre>
@@ -1032,19 +1060,94 @@ lcpm &lt;- lcpm %&gt;%
   guides(color = &quot;none&quot;) +
   theme_bw() +
   theme(text = element_text(size = 12)) +
-  ggtitle(&quot;Pre-Filtration&quot;)
+  ggtitle(&quot;Pre-Filtration&quot;) +
+  labs(x = &quot;expr (logCPM)&quot;)
 
 lcpm_filt_plot &lt;- ggplot(lcpm_filt, aes(x = expr, color = sample)) + 
   geom_density() +
   guides(color = &quot;none&quot;) +
   theme_bw() +
   theme(text = element_text(size = 12)) +
-  ggtitle(&quot;Post-Filtration&quot;)
+  ggtitle(&quot;Post-Filtration&quot;) +
+  labs(x = &quot;expr (logCPM)&quot;)
 
 ggarrange(lcpm_plot, lcpm_filt_plot)</code></pre>
-<p><img src="figure/NK_Scoring.Rmd/unnamed-chunk-7-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/NK_Scoring.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
+Past versions of unnamed-chunk-7-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/robin-a-wagner/NK_CRLM/blob/5f49352a7fb4bb23727f198f68c0e3ef3528cf76/docs/figure/NK_Scoring.Rmd/unnamed-chunk-7-1.png" target="_blank">5f49352</a>
+</td>
+<td>
+Robin Wagner (UoM Laptop)
+</td>
+<td>
+2023-08-28
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>Normalise for library size.</p>
 <pre class="r"><code>expr_norm &lt;- calcNormFactors(expr_filt, method = &quot;TMM&quot;)</code></pre>
+<p>Visualise effect of library normalisation.</p>
+<pre class="r"><code>lcpm_norm &lt;- data.frame(edgeR::cpm(expr_norm, log = T))
+lcpm_norm &lt;- lcpm_norm %&gt;%
+  mutate(gene = rownames(lcpm_norm)) %&gt;%
+  tidyr::gather(key = sample, 
+         value = expr, 
+         -gene); head(lcpm_norm)</code></pre>
+<pre><code>       gene   sample      expr
+1    653635 JV388_LT  5.510940
+2 100132287 JV388_LT  3.869794
+3 100131754 JV388_LT 12.334596
+4 100133331 JV388_LT  3.048566
+5     26155 JV388_LT  3.231687
+6    339451 JV388_LT  1.774666</code></pre>
+<pre class="r"><code>lcpm_filt_boxplot &lt;- ggplot(lcpm_filt, aes(x = sample, y = expr, fill = sample)) + 
+  geom_boxplot() +
+  guides(fill = &quot;none&quot;) +
+  theme_bw() +
+  theme(text = element_text(size = 12),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank()) + 
+  ggtitle(&quot;Pre-TMM Normalisation&quot;) +
+  labs(x = &quot;expr (logCPM)&quot;)
+
+lcpm_norm_boxplot &lt;- ggplot(lcpm_norm, aes(x = sample, y = expr, fill = sample)) + 
+  geom_boxplot() +
+  guides(fill = &quot;none&quot;) +
+  theme_bw() +
+  theme(text = element_text(size = 12),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank()) + 
+  ggtitle(&quot;Post-TMM Normalisation&quot;) +
+  labs(x = &quot;expr (logCPM)&quot;)
+
+ggarrange(lcpm_filt_boxplot, lcpm_norm_boxplot)</code></pre>
+<p><img src="figure/NK_Scoring.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="perform-nk-scoring" class="section level3">
 <h3>Perform NK scoring</h3>
@@ -1077,7 +1180,7 @@ scoring with singscore.</p>
   scale_fill_manual(values = brewer.pal(3, &quot;Paired&quot;)) + 
   labs(x = &quot;&quot;) +
   theme(text = element_text(size = 15))</code></pre>
-<p><img src="figure/NK_Scoring.Rmd/unnamed-chunk-12-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="figure/NK_Scoring.Rmd/unnamed-chunk-13-1.png" width="576" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
