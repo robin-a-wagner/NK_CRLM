@@ -20,12 +20,13 @@ library(edgeR)
 library(singscore)
 library(ggplot2)
 library(RColorBrewer)
+library(ggpubr)
 
 ```
 
 ### Prepare data
 
-Read in and prepare the raw counts data for the 58 samples. 
+Read in and prepare the raw counts data for the 58 samples. Data stored in limma DGE List object. 
 
 ```{r}
 
@@ -61,7 +62,7 @@ nk_sig <- read.csv("data/20230822_Shembrey_NK_Signature.csv"); head(nk_sig)
 
 ```
 
-Filter out lowly-expressed genes. 
+Filter out lowly-expressed genes but preserve signature genes for scoring. 
 
 ```{r}
 
@@ -70,6 +71,45 @@ keep2 <- rownames(expr$counts) %in% nk_sig$ENTREZID
 expr_filt <- expr[keep | keep2, ]; dim(expr_filt)
 
 ```
+
+Visualise the effects of filtration. 
+
+```{r}
+
+lcpm <- data.frame(edgeR::cpm(expr, log = T))
+lcpm_filt <- data.frame(edgeR::cpm(expr_filt, log = T))
+
+lcpm <- lcpm %>%
+  mutate(gene = rownames(lcpm)) %>%
+  tidyr::gather(key = sample, value = expr, -gene); head(lcpm)
+
+ggplot(lcpm, aes(x = expr, color = sample)) + 
+  geom_density() +
+  guides(color = "none") +
+  theme_bw() +
+  theme(text = element_text(size = 12))
+ 
+lcpm_filt <- lcpm_filt %>%
+  mutate(gene = rownames(lcpm_filt)) %>%
+  tidyr::gather(key = sample, value = expr, -gene); head(lcpm_filt)
+
+lcpm_plot <- ggplot(lcpm, aes(x = expr, color = sample)) + 
+  geom_density() +
+  guides(color = "none") +
+  theme_bw() +
+  theme(text = element_text(size = 12)) +
+  ggtitle("Pre-Filtration")
+
+lcpm_filt_plot <- ggplot(lcpm_filt, aes(x = expr, color = sample)) + 
+  geom_density() +
+  guides(color = "none") +
+  theme_bw() +
+  theme(text = element_text(size = 12)) +
+  ggtitle("Post-Filtration")
+
+ggarrange(lcpm_plot, lcpm_filt_plot)
+
+````
 
 Normalise for library size. 
 
